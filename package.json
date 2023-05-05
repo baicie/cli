@@ -1,40 +1,28 @@
 {
-  "name": "create-vite",
-  "version": "4.1.0",
-  "type": "module",
+  "name": "create-project-monorepo",
+  "version": "0.0.1",
   "license": "MIT",
-  "author": "Evan You",
-  "bin": {
-    "bcc": "index.js",
-    "@baicie-create-cli": "index.js"
-  },
-  "files": [
-    "index.js",
-    "template-*",
-    "dist"
-  ],
-  "main": "index.js",
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
-  },
-  "engines": {
-    "node": "^14.18.0 || >=16.0.0"
-  },
-  "repository": {
-    "type": "git"
+    "prepublishOnly": "npm run build",
+    "cli": "tsx packages/cli/index.ts",
+    "cz": "cz"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.38.5",
     "@types/minimist": "^1.2.2",
     "@types/prompts": "^2.4.2",
     "@types/resolve": "^1.20.2",
+    "commitizen": "^4.3.0",
     "cross-spawn": "^7.0.3",
+    "cz-customizable": "^7.0.0",
     "kolorist": "^1.7.0",
     "minimist": "^1.2.8",
     "prompts": "^2.4.2",
     "rollup-plugin-license": "^3.0.1",
+    "tsx": "^3.12.7",
     "unbuild": "^1.1.2"
   },
   "dependencies": {
