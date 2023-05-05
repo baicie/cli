@@ -8,6 +8,7 @@
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
     "cli": "tsx packages/cli/index.ts",
+    "dow": "tsx packages/cli/src/create/fetch-git-repo.ts",
     "cz": "cz"
   },
   "devDependencies": {
