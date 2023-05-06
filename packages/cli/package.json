@@ -10,8 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cli-progress": "^3.12.0",
     "consola": "^3.1.0",
     "download-git-repo": "^3.0.2",
-    "prompts": "^2.4.2"
+    "kolorist": "^1.7.0",
+    "prompts": "^2.4.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.11.0",
+    "@types/request": "^2.48.8"
   }
 }
