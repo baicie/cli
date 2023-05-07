@@ -1,7 +1,14 @@
 import consola from 'consola'
 import chalk from 'chalk'
 import type { IProjectConf } from './src'
-import { askDescription, askNpm, askProjectName, askTemplateSource, fetchTemplates } from './src'
+import {
+  askDescription,
+  askNpm,
+  askProjectName,
+  askTemplate,
+  askTemplateSource,
+  fetchTemplates,
+} from './src'
 
 async function ask() {
   const conf: IProjectConf = {
@@ -16,9 +23,9 @@ async function ask() {
   conf.description = await askDescription()
   conf.npm = await askNpm()
   conf.templateSource = await askTemplateSource()
-
+  // 下载模板并返回列表
   const templates = await fetchTemplates(conf)
-
+  conf.template = await askTemplate(templates)
   return {
     ...conf,
   }

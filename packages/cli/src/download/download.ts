@@ -4,7 +4,6 @@ import request from 'request'
 import ora from 'ora'
 import chalk from 'chalk'
 import AdmZip from 'adm-zip'
-import { consola } from 'consola'
 
 interface FileStat {
   name: string
@@ -16,7 +15,7 @@ interface FileStat {
 export async function download(url: string, tempPath: string) {
   const spinner = ora(`正在从 ${url} 拉取远程模板...`).start()
   const zipPath = path.join(tempPath, 'temp.zip')
-  consola.log('zipPath', zipPath, url)
+
   return new Promise<FileStat[]>((resolve) => {
     request(url)
       .pipe(fs.createWriteStream(zipPath))

@@ -11,6 +11,8 @@ export async function fetchTemplates(conf: IProjectConf) {
     conf.templateSource = DEFAULT_TEMPLATE_SRC_GITEE
   }
 
-  //
+  // templates
   const templates = await fetchTemplate(conf.templateSource, templateRoot)
+  // 筛选
+  return templates
 }

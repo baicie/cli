@@ -4,6 +4,7 @@ import { confirm, input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
 import { DEFAULT_TEMPLATE_SRC, DEFAULT_TEMPLATE_SRC_GITEE } from '@baicie/help'
 import { isEmpty } from '../util'
+import type { ITemplates } from '../download'
 
 export * from './types'
 export * from './fetch-templates'
@@ -70,6 +71,7 @@ export async function askNpm() {
   })
 }
 
+// 缺个自己输入
 export async function askTemplateSource() {
   const choices = [
     {
@@ -84,10 +86,28 @@ export async function askTemplateSource() {
       name: 'CLI 内置默认模板',
       value: 'default-template',
     },
+    // 请输入
   ]
 
   return await select({
-    message: '请选择包管理工具',
+    message: '请选择模板源',
+    choices,
+  })
+}
+
+export async function askTemplate(list: ITemplates[]) {
+  const choices = [
+    {
+      name: '默认模板',
+      value: 'default',
+    },
+    ...list.map(item => ({
+      name: item.desc ? `${item.name}（${item.desc}）` : item.name,
+      value: item.name,
+    })),
+  ]
+  return await select({
+    message: '请选择模板',
     choices,
   })
 }
