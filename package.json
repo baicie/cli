@@ -27,6 +27,7 @@
     "unbuild": "^1.1.2"
   },
   "dependencies": {
+    "@baicie/help": "workspace:^",
     "@types/cross-spawn": "^6.0.2"
   }
 }
