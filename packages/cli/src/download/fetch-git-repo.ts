@@ -1,7 +1,7 @@
 import path from 'node:path'
 import fs from 'fs-extra'
-import { TEMPLATE_CREATOR } from '@baicie/help'
-import { templateRoot } from '../util'
+import { TEMPLATE_CREATOR, templateRoot } from '../util'
+
 import type { FileStat } from './download'
 import { download, readDirWithFileTypes } from './download'
 

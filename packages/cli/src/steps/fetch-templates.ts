@@ -1,6 +1,6 @@
-import { DEFAULT_TEMPLATE_SRC_GITEE } from '@baicie/help'
+import { DEFAULT_TEMPLATE_SRC_GITEE, templateRoot } from '../util'
 import { fetchTemplate } from '../download'
-import { templateRoot } from '../util'
+
 import type { IProjectConf } from './types'
 
 export async function fetchTemplates(conf: IProjectConf) {

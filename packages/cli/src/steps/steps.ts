@@ -1,8 +1,8 @@
 import fs from 'fs-extra'
 import { confirm, input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
-import { DEFAULT_TEMPLATE_SRC, DEFAULT_TEMPLATE_SRC_GITEE } from '@baicie/help'
-import { isEmpty, isValidPackageName } from '../util'
+import { DEFAULT_TEMPLATE_SRC, DEFAULT_TEMPLATE_SRC_GITEE, isEmpty, isValidPackageName } from '../util'
+
 import type { ITemplates } from '../download'
 
 const defaultTargetDir = 'my-project'

@@ -7,8 +7,7 @@
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "cli": "tsx packages/cli/cli.ts",
-    "dow": "tsx packages/cli/src/create/fetch-git-repo.ts",
+    "cli": "tsx packages/cli/index.ts",
     "cz": "cz"
   },
   "devDependencies": {
@@ -23,11 +22,11 @@
     "minimist": "^1.2.8",
     "prompts": "^2.4.2",
     "rollup-plugin-license": "^3.0.1",
+    "tsup": "^6.7.0",
     "tsx": "^3.12.7",
     "unbuild": "^1.1.2"
   },
   "dependencies": {
-    "@baicie/help": "workspace:^",
     "@types/cross-spawn": "^6.0.2"
   }
 }

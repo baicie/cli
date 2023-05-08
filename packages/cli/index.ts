@@ -15,14 +15,14 @@ async function ask() {
   const conf: IProjectConf = {
     projectName: '',
     description: '',
-    npm: '',
+    npm: 'pnpm',
     templateSource: '',
     template: '',
   }
 
   conf.projectName = await askProjectName()
   conf.description = await askDescription()
-  conf.npm = await askNpm()
+  conf.npm = await askNpm() as IProjectConf['npm']
   conf.templateSource = await askTemplateSource()
   // 下载模板并返回列表
   const templates = await fetchTemplates(conf)
@@ -36,7 +36,7 @@ async function write(conf: IProjectConf) {
   await createApp(conf)
 }
 
-async function main() {
+export async function main() {
   try {
     const answers = await ask()
 
