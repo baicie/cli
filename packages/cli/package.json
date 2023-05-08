@@ -1,7 +1,6 @@
 {
   "name": "@baicie/cli",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
   "type": "module",
   "bin": {
     "baicie-create-app": "index.js",
@@ -13,6 +12,12 @@
     "build": "pnpm run clean-dist && pnpm run build-only",
     "clean-dist": "rimraf dist"
   },
+  "files": [
+    "package.json",
+    "index.js",
+    "dist",
+    "templates"
+  ],
   "keywords": [],
   "author": "baicie",
   "license": "MIT",
@@ -33,5 +38,10 @@
     "rimraf": "^5.0.0",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "main": "index.js",
+  "description": ""
 }
