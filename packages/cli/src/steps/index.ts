@@ -3,7 +3,7 @@ import { consola } from 'consola'
 import { confirm, input, select } from '@inquirer/prompts'
 import chalk from 'chalk'
 import { DEFAULT_TEMPLATE_SRC, DEFAULT_TEMPLATE_SRC_GITEE } from '@baicie/help'
-import { isEmpty } from '../util'
+import { isEmpty, isValidPackageName } from '../util'
 import type { ITemplates } from '../download'
 
 export * from './types'
@@ -16,6 +16,9 @@ export async function askProjectName() {
     {
       message: '项目名称?',
       default: defaultTargetDir,
+      validate: (value) => {
+        return isValidPackageName(value)
+      },
     },
   )
 

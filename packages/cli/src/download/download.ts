@@ -5,7 +5,7 @@ import ora from 'ora'
 import chalk from 'chalk'
 import AdmZip from 'adm-zip'
 
-interface FileStat {
+export interface FileStat {
   name: string
   isDirectory: boolean
   isFile: boolean
@@ -23,7 +23,6 @@ export async function download(url: string, tempPath: string) {
         // 解压
         const zip = new AdmZip(zipPath)
         zip.extractAllTo(tempPath, true)
-
         // 过滤文件
         const files = readDirWithFileTypes(tempPath).filter(
           file => !file.name.startsWith('.') && file.isDirectory && file.name !== '__MACOSX',

@@ -7,7 +7,7 @@
     "build": "unbuild",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "cli": "tsx packages/cli/index.ts",
+    "cli": "tsx packages/cli/cli.ts",
     "dow": "tsx packages/cli/src/create/fetch-git-repo.ts",
     "cz": "cz"
   },
