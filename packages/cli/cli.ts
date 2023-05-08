@@ -7,6 +7,7 @@ import {
   askProjectName,
   askTemplate,
   askTemplateSource,
+  createApp,
   fetchTemplates,
 } from './src'
 
@@ -31,10 +32,15 @@ async function ask() {
   }
 }
 
+async function write(conf: IProjectConf) {
+  await createApp(conf)
+}
+
 async function main() {
   try {
     const answers = await ask()
-    consola.success(answers)
+
+    await write(answers)
   }
   catch (error) {
     consola.log(chalk.red('创建项目失败：', error))

@@ -25,7 +25,7 @@ export async function download(url: string, tempPath: string) {
         zip.extractAllTo(tempPath, true)
         // 过滤文件
         const files = readDirWithFileTypes(tempPath).filter(
-          file => !file.name.startsWith('.') && file.isDirectory && file.name !== '__MACOSX',
+          file => !file.name.startsWith('.git') && file.isDirectory && file.name !== '__MACOSX',
         )
 
         // 没有文件
