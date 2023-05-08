@@ -1,7 +1,7 @@
 import path from 'node:path'
 import glob from 'fast-glob'
 import fs from 'fs-extra'
-import chalk from 'chalk'
+import * as chalk from 'kolorist'
 import type { IProjectConf } from '../steps'
 
 export async function createFiles(conf: IProjectConf) {
@@ -22,7 +22,7 @@ export async function createFiles(conf: IProjectConf) {
 
     await fs.copy(sourcePath, targetPath, { overwrite: true })
 
-    return (`${chalk.grey(`创建文件: ${targetPath}`)}`)
+    return (`${chalk.green(`创建文件: ${targetPath}`)}`)
   })
 
   const res = await Promise.all(files)

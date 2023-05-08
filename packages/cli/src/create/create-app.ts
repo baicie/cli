@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { exec } from 'node:child_process'
 import { consola } from 'consola'
-import chalk from 'chalk'
+import * as chalk from 'kolorist'
 import fs from 'fs-extra'
 import ora from 'ora'
 import type { IProjectConf } from '../steps'
@@ -21,11 +21,11 @@ export async function createApp(conf: IProjectConf) {
   const logs = await createFiles(conf)
 
   consola.log('')
-  consola.log(`${chalk.green('✔ ')}${chalk.grey(`创建项目: ${chalk.grey.bold(projectName)}`)}`)
+  consola.log(`${chalk.green('✔ ')}${chalk.green(`创建项目: ${chalk.green(projectName)}`)}`)
   logs.forEach(log => consola.success(log))
   consola.log('')
 
-  const gitInitSpinner = ora(`cd ${chalk.cyan.bold(projectName)}, 执行 ${chalk.cyan.bold('git init')}`).start()
+  const gitInitSpinner = ora(`cd ${chalk.cyan(projectName)}, 执行 ${chalk.cyan('git init')}`).start()
   process.chdir(conf.targetPath)
   const gitInit = exec('git init')
   gitInit.on('close', (code) => {
@@ -42,7 +42,7 @@ export async function createApp(conf: IProjectConf) {
   if (autoInstall) {
     // 安装
     const command: string = packagesManagement[npm].command
-    const installSpinner = ora(`执行安装项目依赖 ${chalk.cyan.bold(command)}, 需要一会儿...`).start()
+    const installSpinner = ora(`执行安装项目依赖 ${chalk.cyan(command)}, 需要一会儿...`).start()
 
     // 执行命令
     const child = exec(command, (error) => {
@@ -74,6 +74,6 @@ export async function createApp(conf: IProjectConf) {
 }
 
 function callSuccess(projectName: string | undefined) {
-  consola.log(chalk.green(`创建项目 ${chalk.green.bold(projectName)} 成功！`))
-  consola.log(chalk.green(`请进入项目目录 ${chalk.green.bold(projectName)} 开始工作吧！😝`))
+  consola.log(chalk.green(`创建项目 ${chalk.green(projectName ?? '')} 成功！`))
+  consola.log(chalk.green(`请进入项目目录 ${chalk.green(projectName ?? '')} 开始工作吧！😝`))
 }

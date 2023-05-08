@@ -7,7 +7,9 @@
     "bca": "index.js"
   },
   "scripts": {
-    "build": "tsx build.ts"
+    "build-only": "tsx build.ts",
+    "build": "pnpm run clean-dist && pnpm run build-only",
+    "clean-dist": "rimraf dist"
   },
   "keywords": [],
   "author": "baicie",
@@ -15,10 +17,10 @@
   "dependencies": {
     "@inquirer/prompts": "^1.0.3",
     "adm-zip": "^0.5.10",
-    "chalk": "^5.2.0",
     "consola": "^3.1.0",
     "fast-glob": "^3.2.12",
     "fs-extra": "^11.1.1",
+    "kolorist": "^1.7.0",
     "ora": "^6.3.0",
     "request": "^2.88.2"
   },
@@ -26,6 +28,7 @@
     "@types/adm-zip": "^0.5.0",
     "@types/fs-extra": "^11.0.1",
     "@types/request": "^2.48.8",
+    "rimraf": "^5.0.0",
     "tsx": "^3.12.7"
   }
 }

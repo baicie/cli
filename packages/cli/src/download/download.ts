@@ -2,7 +2,7 @@ import path from 'node:path'
 import fs from 'fs-extra'
 import request from 'request'
 import ora from 'ora'
-import chalk from 'chalk'
+import * as chalk from 'kolorist'
 import AdmZip from 'adm-zip'
 
 export interface FileStat {
@@ -36,7 +36,7 @@ export async function download(url: string, tempPath: string) {
         }
 
         spinner.color = 'green'
-        spinner.succeed(`${chalk.grey('拉取远程模板仓库成功！')}`)
+        spinner.succeed(`${chalk.green('拉取远程模板仓库成功！')}`)
 
         resolve(files)
       })

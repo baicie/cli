@@ -1,5 +1,5 @@
 import consola from 'consola'
-import chalk from 'chalk'
+import * as kolorist from 'kolorist'
 import type { IProjectConf } from './src'
 import {
   askDescription,
@@ -36,14 +36,14 @@ async function write(conf: IProjectConf) {
   await createApp(conf)
 }
 
-export async function main() {
+async function main() {
   try {
     const answers = await ask()
 
     await write(answers)
   }
   catch (error) {
-    consola.log(chalk.red('创建项目失败：', error))
+    consola.log(kolorist.red(`创建项目失败：${error}`))
   }
 }
 

@@ -7,7 +7,6 @@ async function main() {
     format: ['cjs', 'esm'],
     skipNodeModulesBundle: true,
     target: 'es2015',
-    minify: true,
     bundle: true,
     dts: true,
   })
