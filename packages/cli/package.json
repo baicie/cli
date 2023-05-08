@@ -2,12 +2,14 @@
   "name": "@baicie/cli",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "bin": {
     "baicie-create-app": "index.js",
     "bca": "index.js"
   },
   "scripts": {
     "build-only": "tsx build.ts",
+    "build-tsc": "tsc",
     "build": "pnpm run clean-dist && pnpm run build-only",
     "clean-dist": "rimraf dist"
   },
@@ -29,6 +31,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/request": "^2.48.8",
     "rimraf": "^5.0.0",
-    "tsx": "^3.12.7"
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
   }
 }

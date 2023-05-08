@@ -4,9 +4,9 @@ async function main() {
   await build({
     entry: ['index.ts'],
     clean: true,
-    format: ['cjs', 'esm'],
+    format: ['esm'],
     skipNodeModulesBundle: true,
-    target: 'es2015',
+    target: 'esnext',
     bundle: true,
     dts: true,
   })

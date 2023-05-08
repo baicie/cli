@@ -1,3 +1,3 @@
-module.exports = require('./dist/index.js').default
+#!/usr/bin/env node
 
-module.exports.default = module.exports
+import './dist/index.js'
