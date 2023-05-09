@@ -38,35 +38,60 @@ export async function fetchTemplate(repo: string, savePath: string) {
   const name = files[0].name
   const templateFolder = name ? path.join(tempPath, name) : ''
 
+  const isTemplateGroup = !fs.existsSync(path.join(templateFolder, 'package.json'))
+
+  if (isTemplateGroup) {
   // 拷贝解压后文件
-  await Promise.all(
-    repos.map((file) => {
-      const destPath = path.join(templateRoot, file.name)
-      const soucePath = path.join(templateFolder, file.name)
+    await Promise.all(
+      repos.map((file) => {
+        const destPath = path.join(templateRoot, file.name)
+        const soucePath = path.join(templateFolder, file.name)
 
-      fs.mkdirSync(destPath, { recursive: true })
-      return fs.move(soucePath, destPath, { overwrite: true })
-    }),
-  )
-  // 清除缓存文件
-  await fs.remove(tempPath)
+        fs.mkdirSync(destPath, { recursive: true })
+        return fs.move(soucePath, destPath, { overwrite: true })
+      }),
+    )
+    // 清除缓存文件
+    await fs.remove(tempPath)
 
-  const res: ITemplates[] = repos.map((file) => {
+    const res: ITemplates[] = repos.map((file) => {
     // 读取模板配置
-    const creatorFile = path.join(savePath, file.name, TEMPLATE_CREATOR)
+      const creatorFile = path.join(savePath, file.name, TEMPLATE_CREATOR)
 
-    if (!fs.existsSync(creatorFile))
-      return { name: file.name }
+      if (!fs.existsSync(creatorFile))
+        return { name: file.name }
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-    const { platforms = '', desc = '' } = require(creatorFile)
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+      const { platforms = '', desc = '' } = require(creatorFile)
 
-    return {
-      name,
-      platforms,
-      desc,
+      return {
+        name,
+        platforms,
+        desc,
+      }
+    })
+
+    return res
+  }
+  else {
+    // 单模板
+    await fs.move(templateFolder, path.join(templateRoot, name), { overwrite: true })
+    await fs.remove(tempPath)
+
+    let res: ITemplates[] = [{ name }]
+    const creatorFile = path.join(templateRoot, name, TEMPLATE_CREATOR)
+
+    if (fs.existsSync(creatorFile)) {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+      const { platforms = '', desc = '' } = require(creatorFile)
+
+      res = [{
+        name,
+        platforms,
+        desc,
+      }]
     }
-  })
 
-  return res
+    return res
+  }
 }
