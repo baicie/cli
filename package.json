@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "unbuild --stub",
-    "build": "unbuild",
+    "build": "pnpm run -C packages/cli build",
+    "update:version": "tsx scripts/update-version.ts",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
     "cli": "tsx packages/cli/index.ts",
@@ -27,6 +27,10 @@
     "unbuild": "^1.1.2"
   },
   "dependencies": {
-    "@types/cross-spawn": "^6.0.2"
+    "@baicie/cli": "workspace:^",
+    "@pnpm/find-workspace-packages": "^6.0.7",
+    "@types/cross-spawn": "^6.0.2",
+    "chalk": "^5.2.0",
+    "consola": "^3.1.0"
   }
 }
