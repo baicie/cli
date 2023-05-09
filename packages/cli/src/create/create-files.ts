@@ -1,7 +1,7 @@
 import path from 'node:path'
 import glob from 'fast-glob'
 import fs from 'fs-extra'
-import * as chalk from 'kolorist'
+import chalk from 'chalk'
 import type { IProjectConf } from '../steps'
 import { TEMPLATE_CREATOR, excludeFiles } from '../util'
 

@@ -8,7 +8,7 @@ async function main() {
     skipNodeModulesBundle: true,
     target: 'esnext',
     bundle: true,
-    dts: true,
+    // dts: true,
   })
 }
 

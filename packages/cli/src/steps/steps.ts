@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 import { confirm, input, select } from '@inquirer/prompts'
-import * as chalk from 'kolorist'
+import chalk from 'chalk'
 import { DEFAULT_TEMPLATE_SRC, DEFAULT_TEMPLATE_SRC_GITEE, isEmpty, isValidPackageName } from '../util'
 
 import type { ITemplates } from '../download'
