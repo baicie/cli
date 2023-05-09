@@ -29,7 +29,7 @@ async function main() {
   const pkgs = Object.fromEntries(
     (await getWorkspacePackages()).map(pkg => [pkg.manifest.name!, pkg]),
   )
-  consola.info(pkgs)
+
   const BaicieCli = pkgs['@baicie/cli']
 
   const writeVersion = async (project: Project) => {
