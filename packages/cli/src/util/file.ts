@@ -1,7 +1,4 @@
-import { TEMPLATE_CREATOR } from './contance'
-
-export function excludeFiles(files: string[]) {
-  const excludes = ['node_modules', 'test', 'mock', 'gulpfile', 'dist', '.git/', TEMPLATE_CREATOR]
+export function excludeFiles(files: string[], excludes: string[]) {
   return files.filter(
     path => !excludes.some(exclude => path.includes(exclude)),
   )

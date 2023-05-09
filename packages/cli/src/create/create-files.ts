@@ -3,14 +3,15 @@ import glob from 'fast-glob'
 import fs from 'fs-extra'
 import * as chalk from 'kolorist'
 import type { IProjectConf } from '../steps'
-import { excludeFiles } from '../util'
+import { TEMPLATE_CREATOR, excludeFiles } from '../util'
 
 export async function createFiles(conf: IProjectConf) {
+  const excludes = ['node_modules', 'test', 'mock', 'gulpfile', 'dist', '.git/', TEMPLATE_CREATOR]
   const files = excludeFiles(await glob('**/**', {
     cwd: conf.sourcePath,
     onlyFiles: true,
     dot: true,
-  }))
+  }), excludes)
 
   // 可以换成同步
   files.map(async (file) => {
@@ -20,7 +21,7 @@ export async function createFiles(conf: IProjectConf) {
     const targetPath = path.join(conf.targetPath, file)
 
     if (!fs.existsSync(path.dirname(targetPath)))
-      fs.mkdirSync(path.dirname(targetPath))
+      fs.mkdirSync(path.dirname(targetPath), { recursive: true })
 
     await fs.copy(sourcePath, targetPath, { overwrite: true })
 

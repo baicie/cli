@@ -5,6 +5,7 @@ import {
   askDescription,
   askNpm,
   askProjectName,
+  askSelfInputTemplateSource,
   askTemplate,
   askTemplateSource,
   createApp,
@@ -24,6 +25,10 @@ async function ask() {
   conf.description = await askDescription()
   conf.npm = await askNpm() as IProjectConf['npm']
   conf.templateSource = await askTemplateSource()
+
+  if (conf.templateSource === 'self-input')
+    conf.templateSource = await askSelfInputTemplateSource()
+
   // 下载模板并返回列表
   const templates = await fetchTemplates(conf)
   conf.template = await askTemplate(templates)

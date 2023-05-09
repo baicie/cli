@@ -14,6 +14,7 @@ export interface ITemplates {
 const TEMP_DOWNLOAD_FOLDER = 'baicie-temp'
 
 export async function fetchTemplate(repo: string, savePath: string) {
+  // await clearTemplates(savePath)
   // savePath templates/
   // tempPath templates/baicie-temp/
   const tempPath = path.join(savePath, TEMP_DOWNLOAD_FOLDER)
@@ -40,9 +41,11 @@ export async function fetchTemplate(repo: string, savePath: string) {
   // 拷贝解压后文件
   await Promise.all(
     repos.map((file) => {
-      const dest = path.join(templateRoot, file.name)
+      const destPath = path.join(templateRoot, file.name)
       const soucePath = path.join(templateFolder, file.name)
-      return fs.move(soucePath, dest, { overwrite: true })
+
+      fs.mkdirSync(destPath, { recursive: true })
+      return fs.move(soucePath, destPath, { overwrite: true })
     }),
   )
   // 清除缓存文件

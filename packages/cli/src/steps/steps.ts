@@ -70,7 +70,12 @@ export async function askNpm() {
   })
 }
 
-// 缺个自己输入
+export async function askSelfInputTemplateSource() {
+  return input({
+    message: '请输入github地址',
+  })
+}
+
 export async function askTemplateSource() {
   const choices = [
     {
@@ -85,7 +90,10 @@ export async function askTemplateSource() {
       name: 'CLI 内置默认模板',
       value: 'default-template',
     },
-    // 请输入
+    {
+      name: '自定义',
+      value: 'self-input',
+    },
   ]
 
   return await select({
