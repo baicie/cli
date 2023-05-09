@@ -1,5 +1,5 @@
 node_modules
 pnpm-lock.yaml
 dist
-my-project
-# test/temp
+packages/cli/templates/**
+!packages/cli/templates/default 

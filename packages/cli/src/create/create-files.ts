@@ -3,12 +3,14 @@ import glob from 'fast-glob'
 import fs from 'fs-extra'
 import * as chalk from 'kolorist'
 import type { IProjectConf } from '../steps'
+import { excludeFiles } from '../util'
 
 export async function createFiles(conf: IProjectConf) {
-  const files = await glob('**/**', {
+  const files = excludeFiles(await glob('**/**', {
     cwd: conf.sourcePath,
     onlyFiles: true,
-  })
+    dot: true,
+  }))
 
   // 可以换成同步
   files.map(async (file) => {

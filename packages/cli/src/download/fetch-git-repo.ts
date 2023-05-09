@@ -17,7 +17,6 @@ export async function fetchTemplate(repo: string, savePath: string) {
   // savePath templates/
   // tempPath templates/baicie-temp/
   const tempPath = path.join(savePath, TEMP_DOWNLOAD_FOLDER)
-
   if (fs.existsSync(tempPath))
     await fs.remove(tempPath)
   await fs.mkdir(tempPath)
