@@ -16,10 +16,9 @@ jobs:
           registry-url: https://registry.npmjs.com/
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Get git head
-        run: echo "GIT_HEAD=${GITHUB_SHA}" >> $GITHUB_ENV
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.2.0
 
       - name: Build&publish
         run: sh ./scripts/publish.sh
