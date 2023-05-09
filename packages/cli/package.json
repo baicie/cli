@@ -41,9 +41,5 @@
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "main": "index.js",
-  "description": ""
+  "main": "index.js"
 }
