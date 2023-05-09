@@ -21,7 +21,9 @@ jobs:
           version: 8.2.0
 
       - name: Gen npmrc
-        run: echo "//registry.npmjs.com/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ./.npmrc
+        run:
+          echo "//registry.npmjs.com/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ./.npmrc
+          whoami
 
       - name: Build&publish
         run: sh ./scripts/publish.sh
