@@ -22,7 +22,7 @@
   "author": "baicie",
   "license": "MIT",
   "dependencies": {
-    "@inquirer/prompts": "^7.4.1",
+    "@inquirer/prompts": "^7.6.0",
     "adm-zip": "^0.5.16",
     "consola": "^3.4.2",
     "fast-glob": "^3.3.3",
@@ -38,7 +38,7 @@
     "@types/git-clone": "^0.2.4",
     "@types/request": "^2.48.12",
     "rimraf": "^6.0.1",
-    "tsx": "^4.19.3",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   },
   "main": "index.js"

@@ -3,6 +3,7 @@ import chalk from "chalk";
 import type { IProjectConf } from "./src";
 import {
   askDescription,
+  askGitRemote,
   askNpm,
   askProjectName,
   askSelfInputTemplateSource,
@@ -32,6 +33,8 @@ async function ask() {
   // 下载模板并返回列表
   const templates = await fetchTemplates(conf);
   conf.template = await askTemplate(templates);
+
+  conf.gitRemote = await askGitRemote();
   return {
     ...conf,
   };
