@@ -11,7 +11,14 @@ import packagesManagement from "./commonds";
 
 export async function createApp(conf: IProjectConf) {
   // 目标文件夹 和源文件夹
-  const { projectName, template, autoInstall = true, npm, gitRemote } = conf;
+  const {
+    projectName,
+    template,
+    autoInstall = true,
+    npm,
+    gitInit = false,
+    gitRemote,
+  } = conf;
   conf.sourcePath = path.join(templateRoot, template);
   conf.targetPath = path.join(process.cwd(), projectName);
 
@@ -32,18 +39,18 @@ export async function createApp(conf: IProjectConf) {
   process.chdir(conf.targetPath);
 
   // 初始化 Git 仓库并关联远程仓库
-  if (gitRemote === "init-only" || gitRemote) {
+  if (gitInit) {
     // 初始化 Git 仓库
     const gitInitSpinner = ora(`执行 ${chalk.cyan("git init")}`).start();
-    const gitInit = exec("git init");
+    const gitInitProcess = exec("git init");
 
-    gitInit.on("close", (code) => {
+    gitInitProcess.on("close", (code) => {
       if (code === 0) {
         gitInitSpinner.color = "green";
         gitInitSpinner.succeed("Git 初始化成功");
 
         // 如果提供了远程仓库地址，则关联远程仓库
-        if (gitRemote && gitRemote !== "init-only") {
+        if (gitRemote) {
           const gitRemoteSpinner = ora(
             `关联远程仓库 ${chalk.cyan(gitRemote)}`
           ).start();
@@ -63,7 +70,7 @@ export async function createApp(conf: IProjectConf) {
       } else {
         gitInitSpinner.color = "red";
         gitInitSpinner.fail("Git 初始化失败");
-        consola.error(gitInit.stderr?.read());
+        consola.error(gitInitProcess.stderr?.read());
       }
     });
   }

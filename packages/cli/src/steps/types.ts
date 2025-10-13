@@ -7,6 +7,7 @@ export interface IProjectConf {
   autoInstall?: boolean;
   sourcePath?: string;
   targetPath?: string;
+  gitInit?: boolean;
   gitRemote?: string;
 }
 

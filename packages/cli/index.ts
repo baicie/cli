@@ -3,6 +3,7 @@ import chalk from "chalk";
 import type { IProjectConf } from "./src";
 import {
   askDescription,
+  askGitInit,
   askGitRemote,
   askNpm,
   askProjectName,
@@ -34,7 +35,14 @@ async function ask() {
   const templates = await fetchTemplates(conf);
   conf.template = await askTemplate(templates);
 
-  conf.gitRemote = await askGitRemote();
+  // 询问是否需要初始化 Git 仓库
+  conf.gitInit = await askGitInit();
+
+  // 如果需要初始化 Git，则询问远程仓库地址
+  if (conf.gitInit) {
+    conf.gitRemote = await askGitRemote();
+  }
+
   return {
     ...conf,
   };
