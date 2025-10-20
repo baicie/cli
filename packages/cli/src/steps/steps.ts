@@ -79,7 +79,7 @@ export async function askSelfInputTemplateSource() {
 export async function askGitInit() {
   return confirm({
     message: "是否需要初始化 Git 仓库?",
-    default: true,
+    default: false,
   });
 }
 
