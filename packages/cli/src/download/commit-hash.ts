@@ -30,8 +30,8 @@ export async function diffCommit(tempPath: string) {
   const commitFile = path.join(tempPath, ".commit-hash");
   const localCommit = await getLocalCommit(commitFile);
   const remoteCommit = await getRemoteLatestCommit();
-
-  if (localCommit !== remoteCommit) {
+  // 获取失败不去下载
+  if (localCommit !== "" && localCommit !== remoteCommit) {
     fs.writeFileSync(commitFile, remoteCommit);
     return true;
   }
