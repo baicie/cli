@@ -14,7 +14,7 @@ export async function createApp(conf: IProjectConf) {
   const {
     projectName,
     template,
-    autoInstall = true,
+    autoInstall = false,
     npm,
     gitInit = false,
     gitRemote,

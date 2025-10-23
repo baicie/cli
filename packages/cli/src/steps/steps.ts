@@ -23,15 +23,34 @@ export async function askProjectName() {
 
   // 存在且不为空
   if (fs.existsSync(projectName) && !isEmpty(projectName)) {
-    const overwrite = await confirm({
+    const choices = [
+      {
+        name: "覆写",
+        value: "overwrite",
+      },
+      {
+        name: "合并",
+        value: "merge",
+      },
+      {
+        name: "取消",
+        value: "cancel",
+      },
+    ];
+    const overwriteMode = await select({
       message: `当前目录${projectName}已经存在同名项目，是否覆写?`,
+      choices,
     });
-
-    if (overwrite) {
-      // 清除操作
-      fs.removeSync(projectName);
-    } else {
-      throw new Error(chalk.red("取消创建"));
+    switch (overwriteMode) {
+      case "overwrite":
+        fs.removeSync(projectName);
+        break;
+      case "merge":
+        break;
+      case "cancel":
+        throw new Error(chalk.red("取消创建"));
+      default:
+        break;
     }
   }
 
@@ -143,5 +162,12 @@ export async function askTemplate(list: ITemplates[]) {
   return await select({
     message: "请选择模板",
     choices,
+  });
+}
+
+export async function askAutoInstall() {
+  return confirm({
+    message: "是否需要自动安装依赖?",
+    default: false,
   });
 }

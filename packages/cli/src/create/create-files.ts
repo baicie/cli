@@ -8,7 +8,6 @@ import { TEMPLATE_CREATOR, excludeFiles } from "../util";
 export async function createFiles(conf: IProjectConf) {
   const excludes = [
     "node_modules",
-    "test",
     "mock",
     "gulpfile",
     "dist",

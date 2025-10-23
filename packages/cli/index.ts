@@ -2,6 +2,7 @@ import { consola } from "consola";
 import chalk from "picocolors";
 import type { IProjectConf } from "./src";
 import {
+  askAutoInstall,
   askDescription,
   askGitInit,
   askGitRemote,
@@ -50,15 +51,14 @@ async function ask(options: IOptions) {
 
   // 询问是否需要初始化 Git 仓库
   conf.gitInit = await askGitInit();
+  conf.autoInstall = await askAutoInstall();
 
   // 如果需要初始化 Git，则询问远程仓库地址
   if (conf.gitInit) {
     conf.gitRemote = await askGitRemote();
   }
 
-  return {
-    ...conf,
-  };
+  return conf;
 }
 
 async function write(conf: IProjectConf) {
