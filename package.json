@@ -9,10 +9,12 @@
     "prepublishOnly": "npm run build",
     "cli": "tsx packages/cli/index.ts",
     "cli-prod": "node packages/cli/dist/index.js",
-    "cz": "cz"
+    "cz": "cz",
+    "test": "bca"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.0.0",
+    "@baicie/cli": "workspace:^",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
@@ -28,7 +30,6 @@
     "unbuild": "^3.6.1"
   },
   "dependencies": {
-    "@baicie/cli": "workspace:^",
     "@pnpm/find-workspace-packages": "^6.0.9",
     "@types/cross-spawn": "^6.0.6",
     "chalk": "^5.6.2",
