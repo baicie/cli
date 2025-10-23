@@ -1,5 +1,5 @@
 import { consola } from "consola";
-import chalk from "chalk";
+import chalk from "picocolors";
 import type { IProjectConf } from "./src";
 import {
   askDescription,
@@ -13,8 +13,21 @@ import {
   createApp,
   fetchTemplates,
 } from "./src";
+import { Command } from "commander";
+import { createLogger } from "./src/util/logger";
 
-async function ask() {
+const program = new Command();
+
+program.option("-d, --debug", "enable debug mode").parse(process.argv);
+
+export interface IOptions {
+  debug: boolean;
+}
+
+const options = program.opts<IOptions>();
+export const logger = createLogger({ debug: options.debug });
+
+async function ask(options: IOptions) {
   const conf: IProjectConf = {
     projectName: "",
     description: "",
@@ -32,7 +45,7 @@ async function ask() {
     conf.templateSource = await askSelfInputTemplateSource();
 
   // 下载模板并返回列表
-  const templates = await fetchTemplates(conf);
+  const templates = await fetchTemplates(conf, options);
   conf.template = await askTemplate(templates);
 
   // 询问是否需要初始化 Git 仓库
@@ -52,9 +65,10 @@ async function write(conf: IProjectConf) {
   await createApp(conf);
 }
 
-async function main() {
+async function main(options: IOptions) {
+  logger.debug("start");
   try {
-    const answers = await ask();
+    const answers = await ask(options);
 
     await write(answers);
   } catch (error) {
@@ -62,6 +76,6 @@ async function main() {
   }
 }
 
-main().catch((e) => {
+main(options).catch((e) => {
   console.error(e);
 });

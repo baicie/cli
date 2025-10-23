@@ -1,6 +1,6 @@
 import fs from "fs-extra";
 import { confirm, input, select } from "@inquirer/prompts";
-import chalk from "chalk";
+import chalk from "picocolors";
 import {
   DEFAULT_TEMPLATE_SRC,
   DEFAULT_TEMPLATE_SRC_GITEE,
@@ -106,12 +106,12 @@ export async function askGitRemote() {
 export async function askTemplateSource() {
   const choices = [
     {
-      name: "Gitee（最快）",
-      value: DEFAULT_TEMPLATE_SRC_GITEE,
-    },
-    {
       name: "Github（最新）",
       value: DEFAULT_TEMPLATE_SRC,
+    },
+    {
+      name: "Gitee（最快）",
+      value: DEFAULT_TEMPLATE_SRC_GITEE,
     },
     {
       name: "CLI 内置默认模板",

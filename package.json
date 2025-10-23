@@ -12,7 +12,7 @@
     "cz": "cz"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.4.1",
+    "@antfu/eslint-config": "^6.0.0",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",

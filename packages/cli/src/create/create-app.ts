@@ -1,7 +1,7 @@
 import path from "node:path";
 import { exec } from "node:child_process";
 import { consola } from "consola";
-import chalk from "chalk";
+import chalk from "picocolors";
 import fs from "fs-extra";
 import ora from "ora";
 import type { IProjectConf } from "../steps";
