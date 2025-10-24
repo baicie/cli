@@ -9,6 +9,7 @@ export interface IProjectConf {
   targetPath?: string;
   gitInit?: boolean;
   gitRemote?: string;
+  debug: boolean;
 }
 
 export interface AskMethods {

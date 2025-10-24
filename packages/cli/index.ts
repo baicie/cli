@@ -1,4 +1,3 @@
-import { consola } from "consola";
 import chalk from "picocolors";
 import type { IProjectConf } from "./src";
 import {
@@ -12,70 +11,80 @@ import {
   askTemplate,
   askTemplateSource,
   createApp,
+  DEFAULT_TEMPLATE_SRC,
   fetchTemplates,
 } from "./src";
-import { Command } from "commander";
-import { createLogger } from "./src/util/logger";
+import { cac } from "cac";
+import { createLogger, Logger } from "./src/util/logger";
+import { version } from "./version";
 
-const program = new Command();
+const cli = cac("bca");
 
-program.option("-d, --debug", "enable debug mode").parse(process.argv);
+cli.option("-d, --debug [feat]", `[string | boolean] show debug logs`);
 
-export interface IOptions {
-  debug: boolean;
-}
+cli
+  .command("[root]", "start a new project")
+  .option("-des, --description <description>", "description of the project")
+  .option("-n, --npm <npm>", "npm of the project", { default: "pnpm" })
+  .option(
+    "-ts, --template-source <template-source>",
+    "template source of the project",
+    {
+      default: DEFAULT_TEMPLATE_SRC,
+    }
+  )
+  .option("-t, --template <template>", "template of the project")
+  .option("-i, --auto-install [auto-install]", "auto install of the project", {
+    default: false,
+  })
+  .option("-gi, --git-init [git-init]", "git init of the project", {
+    default: false,
+  })
+  .option("-gr, --git-remote <git-remote>", "git remote of the project")
+  .action(async (root: string, options: IProjectConf) => {
+    const logger = createLogger({ debug: options.debug });
+    logger.success(`start a new project ${root}`);
+    logger.success(`options is ${JSON.stringify(options)}`);
+    try {
+      const answers = await ask({ ...options, projectName: root }, logger);
+      await write(answers);
+    } catch (error) {
+      logger.error(chalk.red(`创建项目失败：${error}`));
+    }
+  });
 
-const options = program.opts<IOptions>();
-export const logger = createLogger({ debug: options.debug });
+async function ask(options: IProjectConf, logger: Logger) {
+  if (!options.projectName) {
+    options.projectName = await askProjectName();
+  }
+  options.description = await askDescription();
+  options.npm = (await askNpm()) as IProjectConf["npm"];
+  options.templateSource = await askTemplateSource();
 
-async function ask(options: IOptions) {
-  const conf: IProjectConf = {
-    projectName: "",
-    description: "",
-    npm: "pnpm",
-    templateSource: "",
-    template: "",
-  };
-
-  conf.projectName = await askProjectName();
-  conf.description = await askDescription();
-  conf.npm = (await askNpm()) as IProjectConf["npm"];
-  conf.templateSource = await askTemplateSource();
-
-  if (conf.templateSource === "self-input")
-    conf.templateSource = await askSelfInputTemplateSource();
+  if (options.templateSource === "self-input")
+    options.templateSource = await askSelfInputTemplateSource();
 
   // 下载模板并返回列表
-  const templates = await fetchTemplates(conf, options);
-  conf.template = await askTemplate(templates);
+  const templates = await fetchTemplates(options, options);
+  options.template = await askTemplate(templates);
 
   // 询问是否需要初始化 Git 仓库
-  conf.gitInit = await askGitInit();
-  conf.autoInstall = await askAutoInstall();
+  options.gitInit = await askGitInit();
+  options.autoInstall = await askAutoInstall();
 
   // 如果需要初始化 Git，则询问远程仓库地址
-  if (conf.gitInit) {
-    conf.gitRemote = await askGitRemote();
+  if (options.gitInit) {
+    options.gitRemote = await askGitRemote();
   }
 
-  return conf;
+  return options;
 }
 
 async function write(conf: IProjectConf) {
   await createApp(conf);
 }
 
-async function main(options: IOptions) {
-  logger.debug("start");
-  try {
-    const answers = await ask(options);
+cli.help();
+cli.version(version);
 
-    await write(answers);
-  } catch (error) {
-    consola.log(chalk.red(`创建项目失败：${error}`));
-  }
-}
-
-main(options).catch((e) => {
-  console.error(e);
-});
+cli.parse();

@@ -5,7 +5,7 @@ export interface LoggerOptions {
   debug: boolean;
 }
 
-class Logger {
+export class Logger {
   private _debug = false;
 
   constructor(options: LoggerOptions) {

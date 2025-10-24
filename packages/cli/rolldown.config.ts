@@ -4,7 +4,6 @@ import { builtinModules } from "node:module";
 
 const external = [
   ...Object.keys(pkj.dependencies),
-  ...Object.keys(pkj.devDependencies),
   ...builtinModules,
   ...builtinModules.map((module) => `node:${module}`),
 ];
