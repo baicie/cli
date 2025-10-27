@@ -16,7 +16,11 @@ import {
 } from "./src";
 import { cac } from "cac";
 import { createLogger, Logger } from "./src/util/logger";
-import { version } from "./version";
+import { readFileSync } from "node:fs";
+
+const { version } = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url)).toString()
+);
 
 const cli = cac("bca");
 

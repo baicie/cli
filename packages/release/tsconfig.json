@@ -1,0 +1,24 @@
+{
+  "include": ["src", "scripts"],
+  "compilerOptions": {
+    /* Target node 16 */
+    "module": "ESNext",
+    "lib": ["ES2021"],
+    "target": "ES2021",
+    "skipLibCheck": true,
+
+    /* Transpile with esbuild */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": true
+  }
+}

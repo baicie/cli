@@ -13,7 +13,7 @@
     "test": "bca"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.0.0",
+    "@antfu/eslint-config": "^6.1.0",
     "@baicie/cli": "workspace:^",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
@@ -24,6 +24,7 @@
     "kolorist": "^1.8.0",
     "minimist": "^1.2.8",
     "prompts": "^2.4.2",
+    "rolldown": "1.0.0-beta.45",
     "rollup-plugin-license": "^3.6.0",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
