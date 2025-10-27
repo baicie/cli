@@ -1,6 +1,6 @@
 {
   "name": "@baicie/release",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,13 +22,13 @@
   },
   "devDependencies": {
     "@arnaud-barre/tnode": "^0.25.0",
-    "@types/node": "^22.18.12",
+    "@types/node": "^24.9.1",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "esbuild": "^0.25.11",
     "fs-fixture": "^2.9.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.4"
   }
 }

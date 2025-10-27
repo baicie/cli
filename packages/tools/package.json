@@ -1,6 +1,6 @@
 {
   "name": "@baicie/tools",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A collection of useful utility functions",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -17,8 +17,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -33,6 +33,6 @@
   "packageManager": "pnpm@10.19.0",
   "devDependencies": {
     "tsup": "^8.5.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.3"
   }
 }
