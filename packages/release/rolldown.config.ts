@@ -1,10 +1,10 @@
 import { defineConfig } from "rolldown";
-import pkj from "./package.json";
+import pkg from "./package.json";
 import { builtinModules } from "node:module";
 import { copyFileSync } from "node:fs";
 
 const external = [
-  ...Object.keys(pkj.dependencies),
+  ...Object.keys(pkg.dependencies),
   ...builtinModules,
   ...builtinModules.map((module) => `node:${module}`),
 ];

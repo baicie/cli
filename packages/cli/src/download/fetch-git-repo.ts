@@ -4,7 +4,7 @@ import { CACHE_TEMPLATES, TEMPLATE_CREATOR, templateRoot } from "../util";
 
 import type { FileStat } from "./download";
 import { download, readDirWithFileTypes } from "./download";
-import { IOptions, logger } from "../..";
+import { IOptions, logger } from "../cli";
 import { diffCommit } from "./commit-hash";
 
 export interface ITemplates {

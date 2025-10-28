@@ -1,0 +1,51 @@
+{
+  "name": "@baicie/pkg",
+  "version": "0.1.0",
+  "description": "A powerful toolkit for creating, formatting, validating and manipulating package.json files",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "package.json",
+    "package",
+    "json",
+    "format",
+    "create",
+    "validate",
+    "npm",
+    "node",
+    "typescript"
+  ],
+  "author": "baicie",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/baicie/tools.git",
+    "directory": "packages/package-json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "packageManager": "pnpm@10.19.0",
+  "devDependencies": {
+    "tsdown": "^0.15.10",
+    "typescript": "^5.9.3"
+  }
+}

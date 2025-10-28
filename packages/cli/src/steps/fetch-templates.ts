@@ -2,7 +2,7 @@ import { DEFAULT_TEMPLATE_SRC_GITEE, templateRoot } from "../util";
 import { fetchTemplate } from "../download";
 
 import type { IProjectConf } from "./types";
-import { IOptions } from "../..";
+import { IOptions } from "../cli";
 
 export async function fetchTemplates(conf: IProjectConf, options: IOptions) {
   const { templateSource } = conf;

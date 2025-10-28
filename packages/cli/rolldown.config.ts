@@ -1,19 +1,19 @@
 import { defineConfig } from "rolldown";
-import pkj from "./package.json";
+import pkg from "./package.json";
 import { builtinModules } from "node:module";
 
 const external = [
-  ...Object.keys(pkj.dependencies),
+  ...Object.keys(pkg.dependencies),
   ...builtinModules,
   ...builtinModules.map((module) => `node:${module}`),
 ];
 
 export default defineConfig({
-  input: ["./index.ts"],
+  input: ["./src/cli.ts"],
   output: {
     format: "esm",
     dir: "./dist",
-    entryFileNames: "index.js",
+    entryFileNames: "cli.js",
   },
   external,
 });

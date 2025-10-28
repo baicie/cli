@@ -1,25 +1,16 @@
-import chalk from "picocolors";
-import type { IProjectConf } from "./src";
-import {
-  askAutoInstall,
-  askDescription,
-  askGitInit,
-  askGitRemote,
-  askNpm,
-  askProjectName,
-  askSelfInputTemplateSource,
-  askTemplate,
-  askTemplateSource,
-  createApp,
-  DEFAULT_TEMPLATE_SRC,
-  fetchTemplates,
-} from "./src";
 import { cac } from "cac";
-import { createLogger, Logger } from "./src/util/logger";
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import chalk from "picocolors";
+import { ask, write } from ".";
+import { IProjectConf } from "./steps";
+import { DEFAULT_TEMPLATE_SRC } from "./util";
+import { createLogger } from "./util/logger";
+
+import { IPkgOptions, pkg } from "./pkg";
 
 const { version } = JSON.parse(
-  readFileSync(new URL("./package.json", import.meta.url)).toString()
+  readFileSync(new URL("../package.json", import.meta.url)).toString()
 );
 
 const cli = cac("bca");
@@ -57,36 +48,31 @@ cli
     }
   });
 
-async function ask(options: IProjectConf, logger: Logger) {
-  if (!options.projectName) {
-    options.projectName = await askProjectName();
-  }
-  options.description = await askDescription();
-  options.npm = (await askNpm()) as IProjectConf["npm"];
-  options.templateSource = await askTemplateSource();
+cli
+  .command("pkg [root]", "Format or create package.json file")
+  .option("-c, --create", "Create a new package.json file")
+  .option("-f, --format", "Format existing package.json file", {
+    default: true,
+  })
+  .option("-n, --name <name>", "Package name (for create)")
+  .option("-v, --version <version>", "Package version (for create)", {
+    default: "1.0.0",
+  })
+  .option(
+    "-des, --description <description>",
+    "Package description (for create)"
+  )
+  .action(async (root: string = ".", options: IPkgOptions) => {
+    const logger = createLogger({ debug: options.debug || false });
+    const targetDir = resolve(process.cwd(), root);
+    const pkgPath = resolve(targetDir, "package.json");
 
-  if (options.templateSource === "self-input")
-    options.templateSource = await askSelfInputTemplateSource();
-
-  // 下载模板并返回列表
-  const templates = await fetchTemplates(options, options);
-  options.template = await askTemplate(templates);
-
-  // 询问是否需要初始化 Git 仓库
-  options.gitInit = await askGitInit();
-  options.autoInstall = await askAutoInstall();
-
-  // 如果需要初始化 Git，则询问远程仓库地址
-  if (options.gitInit) {
-    options.gitRemote = await askGitRemote();
-  }
-
-  return options;
-}
-
-async function write(conf: IProjectConf) {
-  await createApp(conf);
-}
+    try {
+      pkg(options, logger, pkgPath);
+    } catch (error) {
+      logger.error(chalk.red(`Failed to process package.json: ${error}`));
+    }
+  });
 
 cli.help();
 cli.version(version);
