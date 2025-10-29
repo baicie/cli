@@ -1,7 +1,9 @@
 {
-  "name": "create-project-monorepo",
+  "name": "root",
+  "private": true,
   "version": "0.0.1",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "build": "pnpm run -C packages/cli build",
     "update:version": "tsx scripts/update-version.ts",
@@ -10,11 +12,14 @@
     "cli": "tsx packages/cli/index.ts",
     "cli-prod": "node packages/cli/dist/index.js",
     "cz": "cz",
-    "test": "bca"
+    "test": "bca",
+    "release": "tsx scripts/release.ts",
+    "ci-publish": "tsx scripts/publishCI.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.1.0",
     "@baicie/cli": "workspace:^",
+    "@baicie/release": "workspace:*",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
@@ -23,10 +28,11 @@
     "cz-customizable": "^7.5.1",
     "kolorist": "^1.8.0",
     "minimist": "^1.2.8",
+    "picocolors": "^1.1.1",
     "prompts": "^2.4.2",
     "rolldown": "1.0.0-beta.45",
     "rollup-plugin-license": "^3.6.0",
-    "tsdown": "^0.15.10",
+    "tsdown": "^0.15.11",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "unbuild": "^3.6.1"
@@ -34,7 +40,6 @@
   "dependencies": {
     "@pnpm/find-workspace-packages": "^6.0.9",
     "@types/cross-spawn": "^6.0.6",
-    "chalk": "^5.6.2",
     "consola": "^3.4.2",
     "rimraf": "^6.0.1"
   }

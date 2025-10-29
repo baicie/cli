@@ -2,14 +2,26 @@
   "name": "@baicie/release",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rolldown -c"
+    "dev": "rolldown --watch -c",
+    "build": "rolldown -c",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.20.0",
   "dependencies": {
     "conventional-changelog": "^7.1.1",
     "conventional-changelog-conventionalcommits": "^9.1.0",
@@ -22,11 +34,11 @@
   },
   "devDependencies": {
     "@arnaud-barre/tnode": "^0.25.0",
-    "@types/node": "^24.9.1",
+    "@types/node": "^24.9.2",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.7.1",
     "esbuild": "^0.25.11",
-    "fs-fixture": "^2.9.0",
+    "fs-fixture": "^2.10.1",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.4"

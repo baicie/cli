@@ -43,9 +43,9 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.20.0",
   "devDependencies": {
-    "tsdown": "^0.15.10",
+    "tsdown": "^0.15.11",
     "typescript": "^5.9.3"
   }
 }

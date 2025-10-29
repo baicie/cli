@@ -13,10 +13,17 @@ copyFileSync("src/types.d.ts", "dist/index.d.ts");
 
 export default defineConfig({
   input: ["./src/index.ts"],
-  output: {
-    format: "esm",
-    dir: "./dist",
-    entryFileNames: "index.js",
-  },
+  output: [
+    {
+      format: "esm",
+      dir: "./dist",
+      entryFileNames: "index.js",
+    },
+    {
+      format: "cjs",
+      dir: "./dist",
+      entryFileNames: "index.cjs",
+    },
+  ],
   external,
 });
