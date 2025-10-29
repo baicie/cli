@@ -14,7 +14,7 @@
     "cz": "cz",
     "test": "bca",
     "release": "tsx scripts/release.ts",
-    "ci-publish": "tsx scripts/publishCI.ts"
+    "ci-publish": "tsx scripts/publish.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.1.0",
