@@ -1,11 +1,8 @@
 {
   "name": "@baicie/tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A collection of useful utility functions",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
