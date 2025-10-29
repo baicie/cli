@@ -1,7 +1,7 @@
 import { defineConfig } from "rolldown";
 import pkg from "./package.json";
 import { builtinModules } from "node:module";
-import { copyFileSync } from "node:fs";
+import { copyFileSync, mkdirSync } from "node:fs";
 
 const external = [
   ...Object.keys(pkg.dependencies),
@@ -9,6 +9,7 @@ const external = [
   ...builtinModules.map((module) => `node:${module}`),
 ];
 
+mkdirSync("dist", { recursive: true });
 copyFileSync("src/types.d.ts", "dist/index.d.ts");
 
 export default defineConfig({
