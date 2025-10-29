@@ -16,7 +16,8 @@
   "scripts": {
     "dev": "rolldown --watch -c",
     "build": "rolldown -c",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "",
