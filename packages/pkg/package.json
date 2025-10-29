@@ -1,11 +1,8 @@
 {
   "name": "@baicie/pkg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A powerful toolkit for creating, formatting, validating and manipulating package.json files",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -36,8 +33,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/baicie/tools.git",
-    "directory": "packages/package-json"
+    "url": "git+https://github.com/baicie/tools.git"
   },
   "publishConfig": {
     "access": "public",
