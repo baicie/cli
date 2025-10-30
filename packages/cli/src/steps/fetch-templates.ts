@@ -1,11 +1,13 @@
 import { DEFAULT_TEMPLATE_SRC_GITEE, templateRoot } from "../util";
 import { fetchTemplate } from "../download";
-
 import type { IProjectConf } from "./types";
-import { IOptions } from "../cli";
 
-export async function fetchTemplates(conf: IProjectConf, options: IOptions) {
-  const { templateSource } = conf;
+export async function fetchTemplates(
+  conf: IProjectConf,
+  options: IProjectConf
+) {
+  const { templateSource, logger } = conf;
+  logger.debug(`templateSource: ${templateSource}`);
 
   if (templateSource === "default-template") {
     conf.template = "default";

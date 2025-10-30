@@ -41,7 +41,7 @@ cli
     logger.success(`start a new project ${root}`);
     logger.success(`options is ${JSON.stringify(options)}`);
     try {
-      const answers = await ask({ ...options, projectName: root }, logger);
+      const answers = await ask({ ...options, projectName: root, logger });
       await write(answers);
     } catch (error) {
       logger.error(chalk.red(`创建项目失败：${error}`));

@@ -4,8 +4,8 @@ import { CACHE_TEMPLATES, TEMPLATE_CREATOR, templateRoot } from "../util";
 
 import type { FileStat } from "./download";
 import { download, readDirWithFileTypes } from "./download";
-import { IOptions, logger } from "../cli";
 import { diffCommit } from "./commit-hash";
+import { IProjectConf } from "../steps";
 
 export interface ITemplates {
   name: string;
@@ -18,9 +18,9 @@ const TEMP_DOWNLOAD_FOLDER = "baicie-temp";
 export async function fetchTemplate(
   repo: string,
   savePath: string,
-  options: IOptions
+  options: IProjectConf
 ) {
-  // await clearTemplates(savePath)
+  const { logger } = options;
   // savePath templates/
   // tempPath templates/baicie-temp/
   const {} = options;

@@ -1,4 +1,4 @@
-import { release } from "@baicie/release";
+import { release } from "../packages/release/src";
 
 release({
   repo: "baicie",

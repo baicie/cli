@@ -19,8 +19,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.1.0",
-    "@baicie/cli": "workspace:^",
-    "@baicie/release": "workspace:*",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
@@ -33,7 +31,7 @@
     "prompts": "^2.4.2",
     "rolldown": "1.0.0-beta.45",
     "rollup-plugin-license": "^3.6.0",
-    "tsdown": "^0.15.11",
+    "tsdown": "^0.15.12",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "unbuild": "^3.6.1"

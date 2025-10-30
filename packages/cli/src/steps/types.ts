@@ -1,3 +1,5 @@
+import { Logger } from "../util/logger";
+
 export interface IProjectConf {
   projectName: string;
   description: string;
@@ -10,6 +12,7 @@ export interface IProjectConf {
   gitInit?: boolean;
   gitRemote?: string;
   debug: boolean;
+  logger: Logger;
 }
 
 export interface AskMethods {

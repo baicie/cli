@@ -42,7 +42,7 @@
     "fs-fixture": "^2.10.1",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.4"
+    "vitest": "^4.0.5"
   },
   "publishConfig": {
     "access": "public",

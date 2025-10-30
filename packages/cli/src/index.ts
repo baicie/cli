@@ -12,16 +12,15 @@ import {
   askTemplateSource,
   fetchTemplates,
 } from "./steps";
-import { Logger } from "./util/logger";
 
-export async function ask(options: IProjectConf, logger: Logger) {
+export async function ask(options: IProjectConf) {
   if (!options.projectName) {
     options.projectName = await askProjectName();
   }
   options.description = await askDescription();
   options.npm = (await askNpm()) as IProjectConf["npm"];
   options.templateSource = await askTemplateSource();
-
+  console.log("options.templateSource", options.templateSource);
   if (options.templateSource === "self-input")
     options.templateSource = await askSelfInputTemplateSource();
 

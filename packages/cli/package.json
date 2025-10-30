@@ -1,15 +1,16 @@
 {
   "name": "@baicie/cli",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "type": "module",
   "bin": {
     "baicie-create-app": "cli.js",
     "bca": "cli.js"
   },
   "scripts": {
-    "dev": "rolldown --watch --sourcemap 'inline' -c",
+    "dev": "rolldown --watch -c",
     "build-only": "rolldown -c",
     "build-tsc": "tsc",
+    "typecheck": "tsc --noEmit",
     "build": "pnpm run clean-dist && pnpm run build-only",
     "clean-dist": "rimraf dist",
     "prepublishOnly": "npm run build"
