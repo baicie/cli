@@ -41,8 +41,7 @@ export async function retry<T>(
 ): Promise<T> {
   try {
     return await fn()
-  }
-  catch (error) {
+  } catch (error) {
     if (times <= 1) {
       throw error
     }
@@ -67,9 +66,11 @@ export async function promisePool<T>(
   const executing: Promise<void>[] = []
 
   for (const [index, task] of tasks.entries()) {
-    const p = Promise.resolve().then(() => task()).then((result) => {
-      results[index] = result
-    })
+    const p = Promise.resolve()
+      .then(() => task())
+      .then(result => {
+        results[index] = result
+      })
 
     results.push(p as any)
 
@@ -96,7 +97,9 @@ export async function promisePool<T>(
  */
 export function allSettled<T>(
   promises: Promise<T>[],
-): Promise<Array<{ status: 'fulfilled', value: T } | { status: 'rejected', reason: any }>> {
+): Promise<
+  Array<{ status: 'fulfilled'; value: T } | { status: 'rejected'; reason: any }>
+> {
   return Promise.all(
     promises.map(promise =>
       promise
@@ -115,9 +118,7 @@ export function allSettled<T>(
  *   () => fetch('url3')
  * ])
  */
-export async function serial<T>(
-  tasks: (() => Promise<T>)[],
-): Promise<T[]> {
+export async function serial<T>(tasks: (() => Promise<T>)[]): Promise<T[]> {
   const results: T[] = []
   for (const task of tasks) {
     results.push(await task())
@@ -136,9 +137,10 @@ export async function serial<T>(
  *   // 被取消
  * }
  */
-export function cancellable<T>(
-  promise: Promise<T>,
-): { promise: Promise<T>, cancel: () => void } {
+export function cancellable<T>(promise: Promise<T>): {
+  promise: Promise<T>
+  cancel: () => void
+} {
   let cancel!: () => void
 
   const cancelPromise = new Promise<never>((_, reject) => {
@@ -186,7 +188,7 @@ export function createDeferred<T>(): {
 export async function poll<T>(
   fn: () => Promise<T>,
   validate: (result: T) => boolean,
-  options: { interval?: number, timeout?: number } = {},
+  options: { interval?: number; timeout?: number } = {},
 ): Promise<T> {
   const { interval = 1000, timeout = 60000 } = options
   const startTime = Date.now()
@@ -205,4 +207,3 @@ export async function poll<T>(
     await sleep(interval)
   }
 }
-

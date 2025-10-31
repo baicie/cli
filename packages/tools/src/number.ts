@@ -8,7 +8,7 @@
  * randomInt(1, 10) // 5
  */
 export function randomInt(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 /**
@@ -17,8 +17,8 @@ export function randomInt(min: number, max: number): number {
  * randomFloat(1, 10, 2) // 5.47
  */
 export function randomFloat(min: number, max: number, decimals = 2): number {
-  const num = Math.random() * (max - min) + min;
-  return Number(num.toFixed(decimals));
+  const num = Math.random() * (max - min) + min
+  return Number(num.toFixed(decimals))
 }
 
 /**
@@ -28,7 +28,7 @@ export function randomFloat(min: number, max: number, decimals = 2): number {
  * clamp(-5, 0, 10) // 0
  */
 export function clamp(num: number, min: number, max: number): number {
-  return Math.min(Math.max(num, min), max);
+  return Math.min(Math.max(num, min), max)
 }
 
 /**
@@ -37,7 +37,7 @@ export function clamp(num: number, min: number, max: number): number {
  * formatNumber(1234567.89) // '1,234,567.89'
  */
 export function formatNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 /**
@@ -47,13 +47,13 @@ export function formatNumber(num: number): string {
  * formatFileSize(1048576) // '1 MB'
  */
 export function formatFileSize(bytes: number, decimals = 2): string {
-  if (bytes === 0) return "0 Bytes";
+  if (bytes === 0) return '0 Bytes'
 
-  const k = 1024;
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  const k = 1024
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
 
-  return `${Number.parseFloat((bytes / k ** i).toFixed(decimals))} ${sizes[i]}`;
+  return `${Number.parseFloat((bytes / k ** i).toFixed(decimals))} ${sizes[i]}`
 }
 
 /**
@@ -63,8 +63,8 @@ export function formatFileSize(bytes: number, decimals = 2): string {
  * percentage(1, 3, 2) // 33.33
  */
 export function percentage(num: number, total: number, decimals = 0): number {
-  if (total === 0) return 0;
-  return Number(((num / total) * 100).toFixed(decimals));
+  if (total === 0) return 0
+  return Number(((num / total) * 100).toFixed(decimals))
 }
 
 /**
@@ -73,7 +73,7 @@ export function percentage(num: number, total: number, decimals = 0): number {
  * padZero(5, 3) // '005'
  */
 export function padZero(num: number, length: number): string {
-  return num.toString().padStart(length, "0");
+  return num.toString().padStart(length, '0')
 }
 
 /**
@@ -82,7 +82,7 @@ export function padZero(num: number, length: number): string {
  * isEven(4) // true
  */
 export function isEven(num: number): boolean {
-  return num % 2 === 0;
+  return num % 2 === 0
 }
 
 /**
@@ -91,7 +91,7 @@ export function isEven(num: number): boolean {
  * isOdd(5) // true
  */
 export function isOdd(num: number): boolean {
-  return num % 2 !== 0;
+  return num % 2 !== 0
 }
 
 /**
@@ -100,7 +100,7 @@ export function isOdd(num: number): boolean {
  * round(1.2345, 2) // 1.23
  */
 export function round(num: number, decimals = 0): number {
-  return Number(Math.round(Number(`${num}e${decimals}`)) + `e-${decimals}`);
+  return Number(Math.round(Number(`${num}e${decimals}`)) + `e-${decimals}`)
 }
 
 /**
@@ -109,7 +109,7 @@ export function round(num: number, decimals = 0): number {
  * ceil(1.2345, 2) // 1.24
  */
 export function ceil(num: number, decimals = 0): number {
-  return Number(Math.ceil(Number(`${num}e${decimals}`)) + `e-${decimals}`);
+  return Number(Math.ceil(Number(`${num}e${decimals}`)) + `e-${decimals}`)
 }
 
 /**
@@ -118,7 +118,7 @@ export function ceil(num: number, decimals = 0): number {
  * floor(1.2345, 2) // 1.23
  */
 export function floor(num: number, decimals = 0): number {
-  return Number(Math.floor(Number(`${num}e${decimals}`)) + `e-${decimals}`);
+  return Number(Math.floor(Number(`${num}e${decimals}`)) + `e-${decimals}`)
 }
 
 /**
@@ -128,7 +128,7 @@ export function floor(num: number, decimals = 0): number {
  * inRange(15, 1, 10) // false
  */
 export function inRange(num: number, min: number, max: number): boolean {
-  return num >= min && num <= max;
+  return num >= min && num <= max
 }
 
 /**
@@ -137,7 +137,7 @@ export function inRange(num: number, min: number, max: number): boolean {
  * gcd(12, 8) // 4
  */
 export function gcd(a: number, b: number): number {
-  return b === 0 ? a : gcd(b, a % b);
+  return b === 0 ? a : gcd(b, a % b)
 }
 
 /**
@@ -146,7 +146,7 @@ export function gcd(a: number, b: number): number {
  * lcm(12, 8) // 24
  */
 export function lcm(a: number, b: number): number {
-  return (a * b) / gcd(a, b);
+  return (a * b) / gcd(a, b)
 }
 
 /**
@@ -156,17 +156,17 @@ export function lcm(a: number, b: number): number {
  * isPrime(8) // false
  */
 export function isPrime(num: number): boolean {
-  if (num <= 1) return false;
-  if (num <= 3) return true;
-  if (num % 2 === 0 || num % 3 === 0) return false;
+  if (num <= 1) return false
+  if (num <= 3) return true
+  if (num % 2 === 0 || num % 3 === 0) return false
 
   for (let i = 5; i * i <= num; i += 6) {
     if (num % i === 0 || num % (i + 2) === 0) {
-      return false;
+      return false
     }
   }
 
-  return true;
+  return true
 }
 
 /**
@@ -175,8 +175,8 @@ export function isPrime(num: number): boolean {
  * factorial(5) // 120
  */
 export function factorial(num: number): number {
-  if (num <= 1) return 1;
-  return num * factorial(num - 1);
+  if (num <= 1) return 1
+  return num * factorial(num - 1)
 }
 
 /**
@@ -185,11 +185,11 @@ export function factorial(num: number): number {
  * fibonacci(10) // 55
  */
 export function fibonacci(n: number): number {
-  if (n <= 1) return n;
-  let a = 0;
-  let b = 1;
+  if (n <= 1) return n
+  let a = 0
+  let b = 1
   for (let i = 2; i <= n; i++) {
-    [a, b] = [b, a + b];
+    ;[a, b] = [b, a + b]
   }
-  return b;
+  return b
 }

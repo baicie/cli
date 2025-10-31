@@ -8,23 +8,23 @@
  * deepClone({ a: 1, b: { c: 2 } })
  */
 export function deepClone<T>(obj: T): T {
-  if (obj === null || typeof obj !== "object") return obj;
+  if (obj === null || typeof obj !== 'object') return obj
 
-  if (obj instanceof Date) return new Date(obj.getTime()) as any;
+  if (obj instanceof Date) return new Date(obj.getTime()) as any
 
-  if (obj instanceof Array) return obj.map((item) => deepClone(item)) as any;
+  if (obj instanceof Array) return obj.map(item => deepClone(item)) as any
 
   if (obj instanceof Object) {
-    const clonedObj = {} as T;
+    const clonedObj = {} as T
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
-        clonedObj[key] = deepClone(obj[key]);
+        clonedObj[key] = deepClone(obj[key])
       }
     }
-    return clonedObj;
+    return clonedObj
   }
 
-  return obj;
+  return obj
 }
 
 /**
@@ -37,30 +37,30 @@ export function deepMerge<T extends Record<string, any>>(
   target: T,
   ...sources: Partial<T>[]
 ): T {
-  if (!sources.length) return target;
+  if (!sources.length) return target
 
-  const source = sources.shift();
+  const source = sources.shift()
 
-  if (source === undefined) return target;
+  if (source === undefined) return target
 
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
         if (!target[key]) {
-          Object.assign(target, { [key]: {} });
+          Object.assign(target, { [key]: {} })
         }
-        deepMerge(target[key], source[key] as any);
+        deepMerge(target[key], source[key] as any)
       } else {
-        Object.assign(target, { [key]: source[key] });
+        Object.assign(target, { [key]: source[key] })
       }
     }
   }
 
-  return deepMerge(target, ...sources);
+  return deepMerge(target, ...sources)
 }
 
 function isObject(item: any): boolean {
-  return item && typeof item === "object" && !Array.isArray(item);
+  return item && typeof item === 'object' && !Array.isArray(item)
 }
 
 /**
@@ -70,17 +70,17 @@ function isObject(item: any): boolean {
  * get({ a: { b: { c: 3 } } }, 'a.x.c', 'default') // 'default'
  */
 export function get<T = any>(obj: any, path: string, defaultValue?: T): T {
-  const keys = path.split(".");
-  let result = obj;
+  const keys = path.split('.')
+  let result = obj
 
   for (const key of keys) {
-    result = result?.[key];
+    result = result?.[key]
     if (result === undefined) {
-      return defaultValue as T;
+      return defaultValue as T
     }
   }
 
-  return result as T;
+  return result as T
 }
 
 /**
@@ -91,21 +91,21 @@ export function get<T = any>(obj: any, path: string, defaultValue?: T): T {
 export function set<T extends Record<string, any>>(
   obj: T,
   path: string,
-  value: any
+  value: any,
 ): T {
-  const keys = path.split(".");
-  const lastKey = keys.pop()!;
-  let current: any = obj;
+  const keys = path.split('.')
+  const lastKey = keys.pop()!
+  let current: any = obj
 
   for (const key of keys) {
-    if (!current[key] || typeof current[key] !== "object") {
-      current[key] = {};
+    if (!current[key] || typeof current[key] !== 'object') {
+      current[key] = {}
     }
-    current = current[key];
+    current = current[key]
   }
 
-  current[lastKey] = value;
-  return obj;
+  current[lastKey] = value
+  return obj
 }
 
 /**
@@ -114,19 +114,19 @@ export function set<T extends Record<string, any>>(
  * unset({ a: { b: { c: 3 } } }, 'a.b.c') // { a: { b: {} } }
  */
 export function unset<T extends Record<string, any>>(obj: T, path: string): T {
-  const keys = path.split(".");
-  const lastKey = keys.pop()!;
-  let current = obj;
+  const keys = path.split('.')
+  const lastKey = keys.pop()!
+  let current = obj
 
   for (const key of keys) {
     if (!current[key]) {
-      return obj;
+      return obj
     }
-    current = current[key];
+    current = current[key]
   }
 
-  delete current[lastKey];
-  return obj;
+  delete current[lastKey]
+  return obj
 }
 
 /**
@@ -136,15 +136,15 @@ export function unset<T extends Record<string, any>>(obj: T, path: string): T {
  */
 export function pick<T extends Record<string, any>, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Pick<T, K> {
-  const result = {} as Pick<T, K>;
+  const result = {} as Pick<T, K>
   for (const key of keys) {
     if (key in obj) {
-      result[key] = obj[key];
+      result[key] = obj[key]
     }
   }
-  return result;
+  return result
 }
 
 /**
@@ -154,13 +154,13 @@ export function pick<T extends Record<string, any>, K extends keyof T>(
  */
 export function omit<T extends Record<string, any>, K extends keyof T>(
   obj: T,
-  keys: K[]
+  keys: K[],
 ): Omit<T, K> {
-  const result = { ...obj };
+  const result = { ...obj }
   for (const key of keys) {
-    delete result[key];
+    delete result[key]
   }
-  return result;
+  return result
 }
 
 /**
@@ -170,9 +170,9 @@ export function omit<T extends Record<string, any>, K extends keyof T>(
  * isEmptyObject({ a: 1 }) // false
  */
 export function isEmptyObject(obj: any): boolean {
-  if (obj == null) return true;
-  if (Array.isArray(obj) || typeof obj === "string") return obj.length === 0;
-  return Object.keys(obj).length === 0;
+  if (obj == null) return true
+  if (Array.isArray(obj) || typeof obj === 'string') return obj.length === 0
+  return Object.keys(obj).length === 0
 }
 
 /**
@@ -181,13 +181,13 @@ export function isEmptyObject(obj: any): boolean {
  * invert({ a: '1', b: '2' }) // { '1': 'a', '2': 'b' }
  */
 export function invert<T extends Record<string, string | number>>(
-  obj: T
+  obj: T,
 ): Record<string, string> {
-  const result: Record<string, string> = {};
+  const result: Record<string, string> = {}
   for (const key in obj) {
-    result[String(obj[key])] = key;
+    result[String(obj[key])] = key
   }
-  return result;
+  return result
 }
 
 /**
@@ -197,16 +197,16 @@ export function invert<T extends Record<string, string | number>>(
  */
 export function cleanObject<T extends Record<string, any>>(
   obj: T,
-  removeNull = true
+  removeNull = true,
 ): Partial<T> {
-  const result: any = {};
+  const result: any = {}
   for (const key in obj) {
-    const value = obj[key];
+    const value = obj[key]
     if (value !== undefined && (!removeNull || value !== null)) {
-      result[key] = value;
+      result[key] = value
     }
   }
-  return result;
+  return result
 }
 
 /**
@@ -217,20 +217,20 @@ export function cleanObject<T extends Record<string, any>>(
  */
 export function flattenObject(
   obj: Record<string, any>,
-  prefix = ""
+  prefix = '',
 ): Record<string, any> {
-  const result: Record<string, any> = {};
+  const result: Record<string, any> = {}
 
   for (const key in obj) {
-    const newKey = prefix ? `${prefix}.${key}` : key;
+    const newKey = prefix ? `${prefix}.${key}` : key
     if (isObject(obj[key])) {
-      Object.assign(result, flattenObject(obj[key], newKey));
+      Object.assign(result, flattenObject(obj[key], newKey))
     } else {
-      result[newKey] = obj[key];
+      result[newKey] = obj[key]
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -240,11 +240,11 @@ export function flattenObject(
  * // { a: { b: { c: 1 } }, d: 2 }
  */
 export function unflattenObject(obj: Record<string, any>): Record<string, any> {
-  const result: Record<string, any> = {};
+  const result: Record<string, any> = {}
 
   for (const key in obj) {
-    set(result, key, obj[key]);
+    set(result, key, obj[key])
   }
 
-  return result;
+  return result
 }

@@ -24,6 +24,9 @@
   "keywords": [],
   "author": "baicie",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@baicie/pkg": "workspace:*",
     "@inquirer/prompts": "^7.9.0",

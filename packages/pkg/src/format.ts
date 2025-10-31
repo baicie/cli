@@ -2,9 +2,9 @@
  * 格式化 package.json
  */
 
-import type { FormatOptions, PackageJson } from "./types";
-import { STANDARD_FIELDS_ORDER } from "./constants";
-import { sortObject } from "./utils";
+import type { FormatOptions, PackageJson } from './types'
+import { STANDARD_FIELDS_ORDER } from './constants'
+import { sortObject } from './utils'
 
 /**
  * 格式化 package.json 内容
@@ -14,7 +14,7 @@ import { sortObject } from "./utils";
  */
 export function formatPackageJson(
   data: PackageJson,
-  options: FormatOptions = {}
+  options: FormatOptions = {},
 ): string {
   const {
     indent = 2,
@@ -22,51 +22,51 @@ export function formatPackageJson(
     sortFields = true,
     sortScripts = false,
     sortDependencies = true,
-  } = options;
+  } = options
 
-  let formatted = { ...data };
+  let formatted = { ...data }
 
   // 排序字段
   if (sortFields) {
     const fieldsOrder = Array.isArray(sortFields)
       ? sortFields
-      : STANDARD_FIELDS_ORDER;
-    formatted = sortObjectByKeys(formatted, fieldsOrder);
+      : STANDARD_FIELDS_ORDER
+    formatted = sortObjectByKeys(formatted, fieldsOrder)
   }
 
   // 排序 scripts
   if (sortScripts && formatted.scripts) {
-    formatted.scripts = sortObject(formatted.scripts);
+    formatted.scripts = sortObject(formatted.scripts)
   }
 
   // 排序依赖
   if (sortDependencies) {
     if (formatted.dependencies) {
-      formatted.dependencies = sortObject(formatted.dependencies);
+      formatted.dependencies = sortObject(formatted.dependencies)
     }
     if (formatted.devDependencies) {
-      formatted.devDependencies = sortObject(formatted.devDependencies);
+      formatted.devDependencies = sortObject(formatted.devDependencies)
     }
     if (formatted.peerDependencies) {
-      formatted.peerDependencies = sortObject(formatted.peerDependencies);
+      formatted.peerDependencies = sortObject(formatted.peerDependencies)
     }
     if (formatted.optionalDependencies) {
       formatted.optionalDependencies = sortObject(
-        formatted.optionalDependencies
-      );
+        formatted.optionalDependencies,
+      )
     }
   }
 
   // 转换为 JSON 字符串
-  const spaces = typeof indent === "number" ? indent : 2;
-  let result = JSON.stringify(formatted, null, spaces);
+  const spaces = typeof indent === 'number' ? indent : 2
+  let result = JSON.stringify(formatted, null, spaces)
 
   // 添加换行符
-  if (endOfLine && !result.endsWith("\n")) {
-    result += "\n";
+  if (endOfLine && !result.endsWith('\n')) {
+    result += '\n'
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -77,15 +77,15 @@ export function formatPackageJson(
  */
 export function formatPackageJsonString(
   content: string,
-  options: FormatOptions = {}
+  options: FormatOptions = {},
 ): string {
   try {
-    const data = JSON.parse(content) as PackageJson;
-    return formatPackageJson(data, options);
+    const data = JSON.parse(content) as PackageJson
+    return formatPackageJson(data, options)
   } catch (error) {
     throw new Error(
-      `无效的 JSON 格式: ${error instanceof Error ? error.message : String(error)}`
-    );
+      `无效的 JSON 格式: ${error instanceof Error ? error.message : String(error)}`,
+    )
   }
 }
 
@@ -97,26 +97,26 @@ export function formatPackageJsonString(
  */
 function sortObjectByKeys<T extends Record<string, any>>(
   obj: T,
-  order: string[]
+  order: string[],
 ): T {
-  const result = {} as T;
-  const keys = Object.keys(obj);
+  const result = {} as T
+  const keys = Object.keys(obj)
 
   // 先添加在 order 中的键
   for (const key of order) {
     if (key in obj) {
-      result[key as keyof T] = obj[key];
+      result[key as keyof T] = obj[key]
     }
   }
 
   // 再添加不在 order 中的键（保持原顺序）
   for (const key of keys) {
     if (!order.includes(key)) {
-      result[key as keyof T] = obj[key];
+      result[key as keyof T] = obj[key]
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -131,5 +131,5 @@ export function prettifyPackageJson(data: PackageJson): string {
     sortFields: true,
     sortScripts: false,
     sortDependencies: true,
-  });
+  })
 }

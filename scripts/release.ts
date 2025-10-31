@@ -1,9 +1,9 @@
-import { release } from "../packages/release/src";
+import { release } from '../packages/release/src'
 
 release({
-  repo: "baicie",
-  packages: ["cli", "release", "tools", "pkg"],
+  repo: 'baicie',
+  packages: ['cli', 'release', 'tools', 'pkg'],
   toTag: (pkg, version) => `${pkg}@${version}`,
-  logChangelog: (pkg) => {},
-  generateChangelog: (pkg) => {},
-});
+  logChangelog: pkg => {},
+  generateChangelog: pkg => {},
+})

@@ -108,9 +108,7 @@ export function memoize<T extends (...args: any[]) => any>(
  * curriedAdd(1)(2)(3) // 6
  * curriedAdd(1, 2)(3) // 6
  */
-export function curry<T extends (...args: any[]) => any>(
-  fn: T,
-): any {
+export function curry<T extends (...args: any[]) => any>(fn: T): any {
   return function curried(this: any, ...args: any[]): any {
     if (args.length >= fn.length) {
       return fn.apply(this, args)
@@ -179,7 +177,7 @@ export function partial<T extends (...args: any[]) => any>(
  * })
  * console.log(result.value, result.time) // 'done', 123 (ms)
  */
-export function measure<T>(fn: () => T): { value: T, time: number } {
+export function measure<T>(fn: () => T): { value: T; time: number } {
   const start = performance.now()
   const value = fn()
   const time = performance.now() - start
@@ -197,7 +195,7 @@ export function measure<T>(fn: () => T): { value: T, time: number } {
  */
 export async function measureAsync<T>(
   fn: () => Promise<T>,
-): Promise<{ value: T, time: number }> {
+): Promise<{ value: T; time: number }> {
   const start = performance.now()
   const value = await fn()
   const time = performance.now() - start
@@ -250,4 +248,3 @@ export function after<T extends (...args: any[]) => any>(
     }
   }
 }
-

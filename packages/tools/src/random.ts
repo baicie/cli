@@ -22,9 +22,9 @@ export function randomId(length = 8): string {
  * uuid() // '550e8400-e29b-41d4-a716-446655440000'
  */
 export function uuid(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = Math.random() * 16 | 0
-    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (Math.random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
   })
 }
@@ -35,7 +35,9 @@ export function uuid(): string {
  * randomColor() // '#ff5733'
  */
 export function randomColor(): string {
-  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`
 }
 
 /**
@@ -152,8 +154,8 @@ export function randomUniqueIntArray(
 export function shuffleArray<T>(arr: T[]): T[] {
   const result = [...arr]
   for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]]
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
   }
   return result
 }
@@ -164,7 +166,8 @@ export function shuffleArray<T>(arr: T[]): T[] {
  * randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') // 'KDJFHGLS'
  */
 export function randomString(length: number, chars?: string): string {
-  const charset = chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charset =
+    chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
   let result = ''
   for (let i = 0; i < length; i++) {
     result += charset.charAt(Math.floor(Math.random() * charset.length))
@@ -179,12 +182,35 @@ export function randomString(length: number, chars?: string): string {
  */
 export function randomChineseName(): string {
   const surnames = ['李', '王', '张', '刘', '陈', '杨', '赵', '黄', '周', '吴']
-  const names = ['伟', '芳', '娜', '秀英', '敏', '静', '丽', '强', '磊', '军', '洋', '艳', '勇', '杰', '涛', '明', '超', '秀兰', '霞', '平']
+  const names = [
+    '伟',
+    '芳',
+    '娜',
+    '秀英',
+    '敏',
+    '静',
+    '丽',
+    '强',
+    '磊',
+    '军',
+    '洋',
+    '艳',
+    '勇',
+    '杰',
+    '涛',
+    '明',
+    '超',
+    '秀兰',
+    '霞',
+    '平',
+  ]
 
   const surname = surnames[Math.floor(Math.random() * surnames.length)]
-  const name = Math.random() < 0.5
-    ? names[Math.floor(Math.random() * names.length)]
-    : names[Math.floor(Math.random() * names.length)] + names[Math.floor(Math.random() * names.length)]
+  const name =
+    Math.random() < 0.5
+      ? names[Math.floor(Math.random() * names.length)]
+      : names[Math.floor(Math.random() * names.length)] +
+        names[Math.floor(Math.random() * names.length)]
 
   return surname + name
 }
@@ -195,9 +221,37 @@ export function randomChineseName(): string {
  * randomPhone() // '13812345678'
  */
 export function randomPhone(): string {
-  const prefixes = ['130', '131', '132', '133', '134', '135', '136', '137', '138', '139',
-    '150', '151', '152', '153', '155', '156', '157', '158', '159',
-    '180', '181', '182', '183', '184', '185', '186', '187', '188', '189']
+  const prefixes = [
+    '130',
+    '131',
+    '132',
+    '133',
+    '134',
+    '135',
+    '136',
+    '137',
+    '138',
+    '139',
+    '150',
+    '151',
+    '152',
+    '153',
+    '155',
+    '156',
+    '157',
+    '158',
+    '159',
+    '180',
+    '181',
+    '182',
+    '183',
+    '184',
+    '185',
+    '186',
+    '187',
+    '188',
+    '189',
+  ]
 
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)]
   const suffix = randomString(8, '0123456789')
@@ -226,4 +280,3 @@ export function randomEmail(): string {
 export function randomIP(): string {
   return `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`
 }
-

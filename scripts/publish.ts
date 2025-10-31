@@ -1,3 +1,3 @@
-import { publish } from "../packages/release/src";
+import { publish } from '../packages/release/src'
 
-publish({ defaultPackage: "@baicie/cli", packageManager: "pnpm" });
+publish({ defaultPackage: '@baicie/cli', packageManager: 'pnpm' })

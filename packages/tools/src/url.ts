@@ -44,8 +44,7 @@ export function stringifyQuery(obj: Record<string, any>): string {
  */
 export function addQuery(url: string, params: Record<string, any>): string {
   const queryString = stringifyQuery(params)
-  if (!queryString)
-    return url
+  if (!queryString) return url
 
   const separator = url.includes('?') ? '&' : '?'
   return `${url}${separator}${queryString}`
@@ -87,8 +86,7 @@ export function getQueryParam(url: string, key: string): string | null {
 export function getDomain(url: string): string {
   try {
     return new URL(url).hostname
-  }
-  catch {
+  } catch {
     return ''
   }
 }
@@ -101,8 +99,7 @@ export function getDomain(url: string): string {
 export function getProtocol(url: string): string {
   try {
     return new URL(url).protocol
-  }
-  catch {
+  } catch {
     return ''
   }
 }
@@ -115,8 +112,7 @@ export function getProtocol(url: string): string {
 export function getPath(url: string): string {
   try {
     return new URL(url).pathname
-  }
-  catch {
+  } catch {
     return ''
   }
 }
@@ -129,8 +125,7 @@ export function getPath(url: string): string {
 export function getHash(url: string): string {
   try {
     return new URL(url).hash
-  }
-  catch {
+  } catch {
     return ''
   }
 }
@@ -202,9 +197,7 @@ export function isSameOrigin(url1: string, url2: string): boolean {
     const origin1 = new URL(url1).origin
     const origin2 = new URL(url2).origin
     return origin1 === origin2
-  }
-  catch {
+  } catch {
     return false
   }
 }
-

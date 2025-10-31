@@ -2,7 +2,7 @@
  * 工具函数
  */
 
-import type { PackageJson } from "./types";
+import type { PackageJson } from './types'
 
 /**
  * 对象按键排序
@@ -10,14 +10,14 @@ import type { PackageJson } from "./types";
  * @returns 排序后的对象
  */
 export function sortObject<T extends Record<string, any>>(obj: T): T {
-  const result = {} as T;
-  const keys = Object.keys(obj).sort();
+  const result = {} as T
+  const keys = Object.keys(obj).sort()
 
   for (const key of keys) {
-    result[key as keyof T] = obj[key];
+    result[key as keyof T] = obj[key]
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -26,7 +26,7 @@ export function sortObject<T extends Record<string, any>>(obj: T): T {
  * @returns 克隆后的对象
  */
 export function deepClone<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
+  return JSON.parse(JSON.stringify(obj))
 }
 
 /**
@@ -36,9 +36,9 @@ export function deepClone<T>(obj: T): T {
  */
 export function safeParseJson(content: string): PackageJson | null {
   try {
-    return JSON.parse(content) as PackageJson;
+    return JSON.parse(content) as PackageJson
   } catch {
-    return null;
+    return null
   }
 }
 
@@ -48,7 +48,7 @@ export function safeParseJson(content: string): PackageJson | null {
  * @returns 是否为空
  */
 export function isEmptyObject(obj: any): boolean {
-  return obj && typeof obj === "object" && Object.keys(obj).length === 0;
+  return obj && typeof obj === 'object' && Object.keys(obj).length === 0
 }
 
 /**
@@ -57,27 +57,27 @@ export function isEmptyObject(obj: any): boolean {
  * @returns 清理后的对象
  */
 export function cleanObject<T extends Record<string, any>>(obj: T): Partial<T> {
-  const result: any = {};
+  const result: any = {}
 
   for (const [key, value] of Object.entries(obj)) {
-    if (value === undefined || value === null || value === "") {
-      continue;
+    if (value === undefined || value === null || value === '') {
+      continue
     }
 
-    if (typeof value === "object" && !Array.isArray(value)) {
+    if (typeof value === 'object' && !Array.isArray(value)) {
       if (!isEmptyObject(value)) {
-        result[key] = cleanObject(value);
+        result[key] = cleanObject(value)
       }
     } else if (Array.isArray(value)) {
       if (value.length > 0) {
-        result[key] = value;
+        result[key] = value
       }
     } else {
-      result[key] = value;
+      result[key] = value
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -88,35 +88,35 @@ export function cleanObject<T extends Record<string, any>>(obj: T): Partial<T> {
  */
 export function mergePackageJson(
   base: PackageJson,
-  override: Partial<PackageJson>
+  override: Partial<PackageJson>,
 ): PackageJson {
-  const result = deepClone(base);
+  const result = deepClone(base)
 
   for (const [key, value] of Object.entries(override)) {
     if (value === undefined) {
-      continue;
+      continue
     }
 
     // 对于依赖字段，进行合并而不是覆盖
     if (
-      (key === "dependencies" ||
-        key === "devDependencies" ||
-        key === "peerDependencies" ||
-        key === "optionalDependencies" ||
-        key === "scripts") &&
-      typeof value === "object" &&
+      (key === 'dependencies' ||
+        key === 'devDependencies' ||
+        key === 'peerDependencies' ||
+        key === 'optionalDependencies' ||
+        key === 'scripts') &&
+      typeof value === 'object' &&
       !Array.isArray(value)
     ) {
       result[key] = {
         ...result[key],
         ...value,
-      };
+      }
     } else {
-      result[key] = value;
+      result[key] = value
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -127,21 +127,21 @@ export function mergePackageJson(
  */
 export function compareVersions(v1: string, v2: string): number {
   // 移除前缀符号
-  const clean1 = v1.replace(/^[^0-9]+/, "");
-  const clean2 = v2.replace(/^[^0-9]+/, "");
+  const clean1 = v1.replace(/^[^0-9]+/, '')
+  const clean2 = v2.replace(/^[^0-9]+/, '')
 
-  const parts1 = clean1.split(".").map(Number);
-  const parts2 = clean2.split(".").map(Number);
+  const parts1 = clean1.split('.').map(Number)
+  const parts2 = clean2.split('.').map(Number)
 
   for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
-    const num1 = parts1[i] || 0;
-    const num2 = parts2[i] || 0;
+    const num1 = parts1[i] || 0
+    const num2 = parts2[i] || 0
 
-    if (num1 > num2) return 1;
-    if (num1 < num2) return -1;
+    if (num1 > num2) return 1
+    if (num1 < num2) return -1
   }
 
-  return 0;
+  return 0
 }
 
 /**
@@ -150,7 +150,7 @@ export function compareVersions(v1: string, v2: string): number {
  * @returns 规范化后的包名
  */
 export function normalizePackageName(name: string): string {
-  return name.replace(/^@[^/]+\//, "");
+  return name.replace(/^@[^/]+\//, '')
 }
 
 /**
@@ -159,8 +159,8 @@ export function normalizePackageName(name: string): string {
  * @returns 作用域，如果没有则返回 null
  */
 export function getPackageScope(name: string): string | null {
-  const match = name.match(/^@([^/]+)\//);
-  return match ? match[1] : null;
+  const match = name.match(/^@([^/]+)\//)
+  return match ? match[1] : null
 }
 
 /**
@@ -169,7 +169,7 @@ export function getPackageScope(name: string): string | null {
  * @returns 是否为作用域包
  */
 export function isScopedPackage(name: string): boolean {
-  return name.startsWith("@") && name.includes("/");
+  return name.startsWith('@') && name.includes('/')
 }
 
 /**
@@ -178,13 +178,13 @@ export function isScopedPackage(name: string): boolean {
  * @returns 格式化的字符串数组
  */
 export function formatDependencyList(
-  dependencies?: Record<string, string>
+  dependencies?: Record<string, string>,
 ): string[] {
   if (!dependencies) {
-    return [];
+    return []
   }
 
   return Object.entries(dependencies).map(
-    ([name, version]) => `${name}@${version}`
-  );
+    ([name, version]) => `${name}@${version}`,
+  )
 }

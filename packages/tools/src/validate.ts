@@ -8,8 +8,8 @@
  * isEmail('test@example.com') // true
  */
 export function isEmail(email: string): boolean {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
 }
 
 /**
@@ -18,8 +18,8 @@ export function isEmail(email: string): boolean {
  * isPhone('13800138000') // true
  */
 export function isPhone(phone: string): boolean {
-  const regex = /^1[3-9]\d{9}$/;
-  return regex.test(phone);
+  const regex = /^1[3-9]\d{9}$/
+  return regex.test(phone)
 }
 
 /**
@@ -29,20 +29,20 @@ export function isPhone(phone: string): boolean {
  */
 export function isIdCard(idCard: string): boolean {
   const regex =
-    /^[1-9]\d{5}(18|19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dX]$/i;
-  if (!regex.test(idCard)) return false;
+    /^[1-9]\d{5}(18|19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{3}[\dX]$/i
+  if (!regex.test(idCard)) return false
 
   // 验证校验码
-  const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-  const checkCodes = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"];
+  const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+  const checkCodes = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
 
-  let sum = 0;
+  let sum = 0
   for (let i = 0; i < 17; i++) {
-    sum += Number.parseInt(idCard[i]) * weights[i];
+    sum += Number.parseInt(idCard[i]) * weights[i]
   }
 
-  const checkCode = checkCodes[sum % 11];
-  return idCard[17].toUpperCase() === checkCode;
+  const checkCode = checkCodes[sum % 11]
+  return idCard[17].toUpperCase() === checkCode
 }
 
 /**
@@ -52,11 +52,10 @@ export function isIdCard(idCard: string): boolean {
  */
 export function isUrl(url: string): boolean {
   try {
-    // eslint-disable-next-line no-new
-    new URL(url);
-    return true;
+    new URL(url)
+    return true
   } catch {
-    return false;
+    return false
   }
 }
 
@@ -67,8 +66,8 @@ export function isUrl(url: string): boolean {
  */
 export function isIPv4(ip: string): boolean {
   const regex =
-    /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;
-  return regex.test(ip);
+    /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/
+  return regex.test(ip)
 }
 
 /**
@@ -77,8 +76,8 @@ export function isIPv4(ip: string): boolean {
  * isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334') // true
  */
 export function isIPv6(ip: string): boolean {
-  const regex = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i;
-  return regex.test(ip);
+  const regex = /^([\da-f]{1,4}:){7}[\da-f]{1,4}$/i
+  return regex.test(ip)
 }
 
 /**
@@ -87,8 +86,8 @@ export function isIPv6(ip: string): boolean {
  * isMac('00:1B:44:11:3A:B7') // true
  */
 export function isMac(mac: string): boolean {
-  const regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i;
-  return regex.test(mac);
+  const regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/i
+  return regex.test(mac)
 }
 
 /**
@@ -97,28 +96,28 @@ export function isMac(mac: string): boolean {
  * isCreditCard('4111111111111111') // true
  */
 export function isCreditCard(cardNumber: string): boolean {
-  const regex = /^\d{13,19}$/;
-  if (!regex.test(cardNumber)) return false;
+  const regex = /^\d{13,19}$/
+  if (!regex.test(cardNumber)) return false
 
   // Luhn 算法验证
-  let sum = 0;
-  let isEven = false;
+  let sum = 0
+  let isEven = false
 
   for (let i = cardNumber.length - 1; i >= 0; i--) {
-    let digit = Number.parseInt(cardNumber[i]);
+    let digit = Number.parseInt(cardNumber[i])
 
     if (isEven) {
-      digit *= 2;
+      digit *= 2
       if (digit > 9) {
-        digit -= 9;
+        digit -= 9
       }
     }
 
-    sum += digit;
-    isEven = !isEven;
+    sum += digit
+    isEven = !isEven
   }
 
-  return sum % 10 === 0;
+  return sum % 10 === 0
 }
 
 /**
@@ -127,8 +126,8 @@ export function isCreditCard(cardNumber: string): boolean {
  * isPostalCode('100000') // true
  */
 export function isPostalCode(code: string): boolean {
-  const regex = /^\d{6}$/;
-  return regex.test(code);
+  const regex = /^\d{6}$/
+  return regex.test(code)
 }
 
 /**
@@ -137,8 +136,8 @@ export function isPostalCode(code: string): boolean {
  * isQQ('123456789') // true
  */
 export function isQQ(qq: string): boolean {
-  const regex = /^[1-9]\d{4,10}$/;
-  return regex.test(qq);
+  const regex = /^[1-9]\d{4,10}$/
+  return regex.test(qq)
 }
 
 /**
@@ -147,8 +146,8 @@ export function isQQ(qq: string): boolean {
  * isWeChat('wxid_123456') // true
  */
 export function isWeChat(wechat: string): boolean {
-  const regex = /^[a-zA-Z][-_a-zA-Z0-9]{5,19}$/;
-  return regex.test(wechat);
+  const regex = /^[a-zA-Z][-_a-zA-Z0-9]{5,19}$/
+  return regex.test(wechat)
 }
 
 /**
@@ -158,8 +157,8 @@ export function isWeChat(wechat: string): boolean {
  */
 export function isLicensePlate(plate: string): boolean {
   const regex =
-    /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳]$/;
-  return regex.test(plate);
+    /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-HJ-NP-Z][A-HJ-NP-Z0-9]{4,5}[A-HJ-NP-Z0-9挂学警港澳]$/
+  return regex.test(plate)
 }
 
 /**
@@ -169,8 +168,8 @@ export function isLicensePlate(plate: string): boolean {
  */
 export function isStrongPassword(password: string): boolean {
   const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-  return regex.test(password);
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/
+  return regex.test(password)
 }
 
 /**
@@ -179,8 +178,8 @@ export function isStrongPassword(password: string): boolean {
  * isMediumPassword('Abc123') // true
  */
 export function isMediumPassword(password: string): boolean {
-  const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,16}$/;
-  return regex.test(password);
+  const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,16}$/
+  return regex.test(password)
 }
 
 /**
@@ -189,8 +188,8 @@ export function isMediumPassword(password: string): boolean {
  * isUsername('user_123') // true
  */
 export function isUsername(username: string): boolean {
-  const regex = /^[a-zA-Z]\w{4,15}$/;
-  return regex.test(username);
+  const regex = /^[a-zA-Z]\w{4,15}$/
+  return regex.test(username)
 }
 
 /**
@@ -199,8 +198,8 @@ export function isUsername(username: string): boolean {
  * isChinese('你好') // true
  */
 export function isChinese(str: string): boolean {
-  const regex = /^[\u4E00-\u9FA5]+$/;
-  return regex.test(str);
+  const regex = /^[\u4E00-\u9FA5]+$/
+  return regex.test(str)
 }
 
 /**
@@ -209,8 +208,8 @@ export function isChinese(str: string): boolean {
  * isEnglish('hello') // true
  */
 export function isEnglish(str: string): boolean {
-  const regex = /^[a-zA-Z]+$/;
-  return regex.test(str);
+  const regex = /^[a-zA-Z]+$/
+  return regex.test(str)
 }
 
 /**
@@ -219,8 +218,8 @@ export function isEnglish(str: string): boolean {
  * isNumeric('12345') // true
  */
 export function isNumeric(str: string): boolean {
-  const regex = /^\d+$/;
-  return regex.test(str);
+  const regex = /^\d+$/
+  return regex.test(str)
 }
 
 /**
@@ -229,8 +228,8 @@ export function isNumeric(str: string): boolean {
  * isAlphanumeric('abc123') // true
  */
 export function isAlphanumeric(str: string): boolean {
-  const regex = /^[a-zA-Z0-9]+$/;
-  return regex.test(str);
+  const regex = /^[a-zA-Z0-9]+$/
+  return regex.test(str)
 }
 
 /**
@@ -240,8 +239,8 @@ export function isAlphanumeric(str: string): boolean {
  * isHexColor('#f00') // true
  */
 export function isHexColor(color: string): boolean {
-  const regex = /^#([0-9A-F]{3}|[0-9A-F]{6})$/i;
-  return regex.test(color);
+  const regex = /^#([0-9A-F]{3}|[0-9A-F]{6})$/i
+  return regex.test(color)
 }
 
 /**
@@ -250,13 +249,13 @@ export function isHexColor(color: string): boolean {
  * isBase64('SGVsbG8gV29ybGQ=') // true
  */
 export function isBase64(str: string): boolean {
-  const regex = /^[A-Za-z0-9+/]+=*$/;
-  if (!regex.test(str)) return false;
+  const regex = /^[A-Za-z0-9+/]+=*$/
+  if (!regex.test(str)) return false
 
   try {
-    return btoa(atob(str)) === str;
+    return btoa(atob(str)) === str
   } catch {
-    return false;
+    return false
   }
 }
 
@@ -267,9 +266,9 @@ export function isBase64(str: string): boolean {
  */
 export function isJSON(str: string): boolean {
   try {
-    JSON.parse(str);
-    return true;
+    JSON.parse(str)
+    return true
   } catch {
-    return false;
+    return false
   }
 }

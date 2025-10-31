@@ -18,7 +18,7 @@ export function unique<T>(arr: T[]): T[] {
  */
 export function uniqueBy<T>(arr: T[], key: keyof T): T[] {
   const seen = new Set()
-  return arr.filter((item) => {
+  return arr.filter(item => {
     const value = item[key]
     if (seen.has(value)) {
       return false
@@ -35,14 +35,17 @@ export function uniqueBy<T>(arr: T[], key: keyof T): T[] {
  * // { a: [{ type: 'a', val: 1 }, { type: 'a', val: 3 }], b: [{ type: 'b', val: 2 }] }
  */
 export function groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {
-  return arr.reduce((acc, item) => {
-    const group = String(item[key])
-    if (!acc[group]) {
-      acc[group] = []
-    }
-    acc[group].push(item)
-    return acc
-  }, {} as Record<string, T[]>)
+  return arr.reduce(
+    (acc, item) => {
+      const group = String(item[key])
+      if (!acc[group]) {
+        acc[group] = []
+      }
+      acc[group].push(item)
+      return acc
+    },
+    {} as Record<string, T[]>,
+  )
 }
 
 /**
@@ -66,8 +69,8 @@ export function chunk<T>(arr: T[], size: number): T[][] {
 export function shuffle<T>(arr: T[]): T[] {
   const result = [...arr]
   for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]]
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
   }
   return result
 }
@@ -135,9 +138,11 @@ export function compact<T>(arr: T[]): T[] {
  */
 export function flatten<T>(arr: T[], depth = 1): T[] {
   return depth > 0
-    ? arr.reduce((acc: any[], val) =>
-        acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val)
-      , [])
+    ? arr.reduce(
+        (acc: any[], val) =>
+          acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val),
+        [],
+      )
     : arr.slice()
 }
 
@@ -169,4 +174,3 @@ export function paginate<T>(arr: T[], page: number, pageSize: number): T[] {
   const start = (page - 1) * pageSize
   return arr.slice(start, start + pageSize)
 }
-

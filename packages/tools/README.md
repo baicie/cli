@@ -215,4 +215,3 @@ pnpm typecheck
 ## License
 
 MIT
-

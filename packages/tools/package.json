@@ -28,6 +28,9 @@
   ],
   "author": "",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
     "tsup": "^8.5.0",

@@ -2,8 +2,8 @@
  * 操作 package.json
  */
 
-import type { PackageJson } from "./types";
-import { deepClone } from "./utils";
+import type { PackageJson } from './types'
+import { deepClone } from './utils'
 
 /**
  * 添加依赖
@@ -18,20 +18,20 @@ export function addDependency(
   name: string,
   version: string,
   type:
-    | "dependencies"
-    | "devDependencies"
-    | "peerDependencies"
-    | "optionalDependencies" = "dependencies"
+    | 'dependencies'
+    | 'devDependencies'
+    | 'peerDependencies'
+    | 'optionalDependencies' = 'dependencies',
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (!result[type]) {
-    result[type] = {};
+    result[type] = {}
   }
 
-  result[type]![name] = version;
+  result[type]![name] = version
 
-  return result;
+  return result
 }
 
 /**
@@ -45,34 +45,34 @@ export function removeDependency(
   data: PackageJson,
   name: string,
   type?:
-    | "dependencies"
-    | "devDependencies"
-    | "peerDependencies"
-    | "optionalDependencies"
+    | 'dependencies'
+    | 'devDependencies'
+    | 'peerDependencies'
+    | 'optionalDependencies',
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (type) {
     if (result[type]) {
-      delete result[type]![name];
+      delete result[type]![name]
     }
   } else {
     // 从所有依赖类型中移除
     const types: Array<keyof PackageJson> = [
-      "dependencies",
-      "devDependencies",
-      "peerDependencies",
-      "optionalDependencies",
-    ];
+      'dependencies',
+      'devDependencies',
+      'peerDependencies',
+      'optionalDependencies',
+    ]
 
     for (const t of types) {
       if (result[t]) {
-        delete (result[t] as Record<string, string>)[name];
+        delete (result[t] as Record<string, string>)[name]
       }
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -85,24 +85,24 @@ export function removeDependency(
 export function updateDependencyVersion(
   data: PackageJson,
   name: string,
-  version: string
+  version: string,
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   const types: Array<keyof PackageJson> = [
-    "dependencies",
-    "devDependencies",
-    "peerDependencies",
-    "optionalDependencies",
-  ];
+    'dependencies',
+    'devDependencies',
+    'peerDependencies',
+    'optionalDependencies',
+  ]
 
   for (const type of types) {
     if (result[type] && name in result[type]!) {
-      (result[type] as Record<string, string>)[name] = version;
+      ;(result[type] as Record<string, string>)[name] = version
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -115,17 +115,17 @@ export function updateDependencyVersion(
 export function addScript(
   data: PackageJson,
   name: string,
-  command: string
+  command: string,
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (!result.scripts) {
-    result.scripts = {};
+    result.scripts = {}
   }
 
-  result.scripts[name] = command;
+  result.scripts[name] = command
 
-  return result;
+  return result
 }
 
 /**
@@ -135,13 +135,13 @@ export function addScript(
  * @returns 更新后的 package.json
  */
 export function removeScript(data: PackageJson, name: string): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (result.scripts) {
-    delete result.scripts[name];
+    delete result.scripts[name]
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -155,20 +155,20 @@ export function addDependencies(
   data: PackageJson,
   dependencies: Record<string, string>,
   type:
-    | "dependencies"
-    | "devDependencies"
-    | "peerDependencies"
-    | "optionalDependencies" = "dependencies"
+    | 'dependencies'
+    | 'devDependencies'
+    | 'peerDependencies'
+    | 'optionalDependencies' = 'dependencies',
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (!result[type]) {
-    result[type] = {};
+    result[type] = {}
   }
 
-  Object.assign(result[type]!, dependencies);
+  Object.assign(result[type]!, dependencies)
 
-  return result;
+  return result
 }
 
 /**
@@ -182,18 +182,18 @@ export function removeDependencies(
   data: PackageJson,
   names: string[],
   type?:
-    | "dependencies"
-    | "devDependencies"
-    | "peerDependencies"
-    | "optionalDependencies"
+    | 'dependencies'
+    | 'devDependencies'
+    | 'peerDependencies'
+    | 'optionalDependencies',
 ): PackageJson {
-  let result = deepClone(data);
+  let result = deepClone(data)
 
   for (const name of names) {
-    result = removeDependency(result, name, type);
+    result = removeDependency(result, name, type)
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -206,11 +206,11 @@ export function removeDependencies(
 export function setField(
   data: PackageJson,
   field: string,
-  value: any
+  value: any,
 ): PackageJson {
-  const result = deepClone(data);
-  result[field] = value;
-  return result;
+  const result = deepClone(data)
+  result[field] = value
+  return result
 }
 
 /**
@@ -220,9 +220,9 @@ export function setField(
  * @returns 更新后的 package.json
  */
 export function removeField(data: PackageJson, field: string): PackageJson {
-  const result = deepClone(data);
-  delete result[field];
-  return result;
+  const result = deepClone(data)
+  delete result[field]
+  return result
 }
 
 /**
@@ -233,22 +233,22 @@ export function removeField(data: PackageJson, field: string): PackageJson {
  */
 export function addKeywords(
   data: PackageJson,
-  keywords: string[]
+  keywords: string[],
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (!result.keywords) {
-    result.keywords = [];
+    result.keywords = []
   }
 
   // 去重添加
   for (const keyword of keywords) {
     if (!result.keywords.includes(keyword)) {
-      result.keywords.push(keyword);
+      result.keywords.push(keyword)
     }
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -259,15 +259,15 @@ export function addKeywords(
  */
 export function removeKeywords(
   data: PackageJson,
-  keywords: string[]
+  keywords: string[],
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (result.keywords) {
-    result.keywords = result.keywords.filter((k) => !keywords.includes(k));
+    result.keywords = result.keywords.filter(k => !keywords.includes(k))
   }
 
-  return result;
+  return result
 }
 
 /**
@@ -278,33 +278,33 @@ export function removeKeywords(
  */
 export function bumpVersion(
   data: PackageJson,
-  type: "major" | "minor" | "patch" = "patch"
+  type: 'major' | 'minor' | 'patch' = 'patch',
 ): PackageJson {
-  const result = deepClone(data);
+  const result = deepClone(data)
 
   if (!result.version) {
-    result.version = "0.1.0";
-    return result;
+    result.version = '0.1.0'
+    return result
   }
 
-  const parts = result.version.split(".").map(Number);
+  const parts = result.version.split('.').map(Number)
 
   switch (type) {
-    case "major":
-      parts[0]++;
-      parts[1] = 0;
-      parts[2] = 0;
-      break;
-    case "minor":
-      parts[1]++;
-      parts[2] = 0;
-      break;
-    case "patch":
-      parts[2]++;
-      break;
+    case 'major':
+      parts[0]++
+      parts[1] = 0
+      parts[2] = 0
+      break
+    case 'minor':
+      parts[1]++
+      parts[2] = 0
+      break
+    case 'patch':
+      parts[2]++
+      break
   }
 
-  result.version = parts.join(".");
+  result.version = parts.join('.')
 
-  return result;
+  return result
 }

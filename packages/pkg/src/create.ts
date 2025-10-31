@@ -2,8 +2,8 @@
  * 创建 package.json
  */
 
-import type { CreateOptions, PackageJson } from "./types";
-import { PRESETS } from "./constants";
+import type { CreateOptions, PackageJson } from './types'
+import { PRESETS } from './constants'
 
 /**
  * 创建 package.json 对象
@@ -12,20 +12,20 @@ import { PRESETS } from "./constants";
  */
 export function createPackageJson(options: CreateOptions = {}): PackageJson {
   const {
-    name = "",
-    version = "0.1.0",
-    description = "",
+    name = '',
+    version = '0.1.0',
+    description = '',
     author,
-    license = "MIT",
-    type = "module",
+    license = 'MIT',
+    type = 'module',
     private: isPrivate,
-    preset = "basic",
-  } = options;
+    preset = 'basic',
+  } = options
 
   // 获取预设模板（深拷贝以避免只读属性问题）
   const template = PRESETS[preset]
     ? JSON.parse(JSON.stringify(PRESETS[preset]))
-    : JSON.parse(JSON.stringify(PRESETS.basic));
+    : JSON.parse(JSON.stringify(PRESETS.basic))
 
   // 合并用户选项
   const packageJson: PackageJson = {
@@ -34,24 +34,24 @@ export function createPackageJson(options: CreateOptions = {}): PackageJson {
     version: version || template.version,
     description: description || template.description,
     license: license || template.license,
-  };
+  }
 
   // 添加 author
   if (author) {
-    packageJson.author = author;
+    packageJson.author = author
   }
 
   // 添加 type
-  if (type && preset !== "basic") {
-    packageJson.type = type;
+  if (type && preset !== 'basic') {
+    packageJson.type = type
   }
 
   // 添加 private
-  if (typeof isPrivate === "boolean") {
-    packageJson.private = isPrivate;
+  if (typeof isPrivate === 'boolean') {
+    packageJson.private = isPrivate
   }
 
-  return packageJson;
+  return packageJson
 }
 
 /**
@@ -62,10 +62,10 @@ export function createPackageJson(options: CreateOptions = {}): PackageJson {
  */
 export function createPackageJsonString(
   options: CreateOptions = {},
-  indent = 2
+  indent = 2,
 ): string {
-  const packageJson = createPackageJson(options);
-  return JSON.stringify(packageJson, null, indent) + "\n";
+  const packageJson = createPackageJson(options)
+  return JSON.stringify(packageJson, null, indent) + '\n'
 }
 
 /**
@@ -76,12 +76,12 @@ export function createPackageJsonString(
  */
 export function clonePackageJson(
   base: PackageJson,
-  overrides: Partial<PackageJson> = {}
+  overrides: Partial<PackageJson> = {},
 ): PackageJson {
   return {
     ...JSON.parse(JSON.stringify(base)),
     ...overrides,
-  };
+  }
 }
 
 /**
@@ -92,17 +92,17 @@ export function clonePackageJson(
  */
 export function createMinimalPackageJson(
   name?: string,
-  version = "0.1.0"
+  version = '0.1.0',
 ): PackageJson {
   const packageJson: PackageJson = {
     version,
-  };
-
-  if (name) {
-    packageJson.name = name;
   }
 
-  return packageJson;
+  if (name) {
+    packageJson.name = name
+  }
+
+  return packageJson
 }
 
 /**
@@ -112,18 +112,18 @@ export function createMinimalPackageJson(
  * @returns package.json 对象
  */
 export function createByProjectType(
-  projectType: "library" | "cli" | "app" | "monorepo",
-  name?: string
+  projectType: 'library' | 'cli' | 'app' | 'monorepo',
+  name?: string,
 ): PackageJson {
   const presetMap = {
-    library: "library",
-    cli: "cli",
-    app: "basic",
-    monorepo: "monorepo",
-  } as const;
+    library: 'library',
+    cli: 'cli',
+    app: 'basic',
+    monorepo: 'monorepo',
+  } as const
 
   return createPackageJson({
     name,
     preset: presetMap[projectType] as any,
-  });
+  })
 }

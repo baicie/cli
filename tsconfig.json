@@ -1,16 +1,40 @@
 {
-  "include": ["packages"],
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "strict": true,
-    "skipLibCheck": true,
-    "declaration": false,
+    "baseUrl": ".",
+    "outDir": "temp",
     "sourceMap": false,
+    "target": "es2016",
+    "newLine": "LF",
+    "useDefineForClassFields": false,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowJs": false,
+    "strict": true,
     "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
-  }
+    "removeComments": false,
+    "jsx": "preserve",
+    "lib": ["es2016", "dom"],
+    "types": ["vitest/globals", "node"],
+    "rootDir": ".",
+    "paths": {
+      "@zeus-js/*": ["packages/*/src"]
+    },
+    "isolatedDeclarations": true,
+    "composite": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "packages/global.d.ts",
+    "packages/*/src",
+    "packages/*/__tests__",
+    "packages/zeus/jsx-runtime",
+    "playground/benchmarks",
+    "scripts/*",
+    "rollup.*.js"
+  ]
 }

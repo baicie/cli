@@ -8,7 +8,10 @@
  * formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss')
  * // '2024-01-01 12:00:00'
  */
-export function formatDate(date: Date | number | string, format = 'YYYY-MM-DD'): string {
+export function formatDate(
+  date: Date | number | string,
+  format = 'YYYY-MM-DD',
+): string {
   const d = new Date(date)
 
   const year = d.getFullYear()
@@ -22,13 +25,13 @@ export function formatDate(date: Date | number | string, format = 'YYYY-MM-DD'):
   const pad = (n: number) => String(n).padStart(2, '0')
 
   const replacements: Record<string, string> = {
-    'YYYY': String(year),
-    'MM': pad(month),
-    'DD': pad(day),
-    'HH': pad(hours),
-    'mm': pad(minutes),
-    'ss': pad(seconds),
-    'SSS': String(milliseconds).padStart(3, '0'),
+    YYYY: String(year),
+    MM: pad(month),
+    DD: pad(day),
+    HH: pad(hours),
+    mm: pad(minutes),
+    ss: pad(seconds),
+    SSS: String(milliseconds).padStart(3, '0'),
   }
 
   let result = format
@@ -56,16 +59,11 @@ export function timeAgo(date: Date | number | string): string {
   const months = Math.floor(days / 30)
   const years = Math.floor(days / 365)
 
-  if (years > 0)
-    return `${years} 年前`
-  if (months > 0)
-    return `${months} 个月前`
-  if (days > 0)
-    return `${days} 天前`
-  if (hours > 0)
-    return `${hours} 小时前`
-  if (minutes > 0)
-    return `${minutes} 分钟前`
+  if (years > 0) return `${years} 年前`
+  if (months > 0) return `${months} 个月前`
+  if (days > 0) return `${days} 天前`
+  if (hours > 0) return `${hours} 小时前`
+  if (minutes > 0) return `${minutes} 分钟前`
   return '刚刚'
 }
 
@@ -107,7 +105,10 @@ export function isTomorrow(date: Date | number | string): boolean {
  * @example
  * daysBetween(new Date('2024-01-01'), new Date('2024-01-10')) // 9
  */
-export function daysBetween(date1: Date | number | string, date2: Date | number | string): number {
+export function daysBetween(
+  date1: Date | number | string,
+  date2: Date | number | string,
+): number {
   const d1 = new Date(date1).getTime()
   const d2 = new Date(date2).getTime()
   return Math.floor(Math.abs(d2 - d1) / 86400000)
@@ -191,7 +192,15 @@ export function isLeapYear(year: number): boolean {
  * getWeekday(new Date()) // '星期一'
  */
 export function getWeekday(date: Date | number | string): string {
-  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  const weekdays = [
+    '星期日',
+    '星期一',
+    '星期二',
+    '星期三',
+    '星期四',
+    '星期五',
+    '星期六',
+  ]
   return weekdays[new Date(date).getDay()]
 }
 
@@ -230,4 +239,3 @@ export function isDateInRange(
   const e = new Date(end).getTime()
   return d >= s && d <= e
 }
-

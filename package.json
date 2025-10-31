@@ -5,34 +5,57 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "pnpm run -C packages/cli build",
-    "update:version": "tsx scripts/update-version.ts",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
-    "cli": "tsx packages/cli/index.ts",
-    "cli-prod": "node packages/cli/dist/index.js",
-    "cz": "cz",
-    "test": "bca",
+    "clean": "rimraf --glob packages/*/dist temp .eslintcache",
+    "check": "tsc --incremental --noEmit",
+    "lint": "eslint --cache .",
+    "format": "prettier --write --cache .",
+    "format-check": "prettier --check --cache .",
+    "test": "vitest",
+    "test-unit": "vitest --project unit*",
+    "test-e2e": "node scripts/build.js zeus -f global -d && vitest --project e2e",
+    "test-coverage": "vitest run --project unit* --coverage",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publish.ts"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged && pnpm check",
+    "commit-msg": "node scripts/verify-commit.js"
+  },
+  "lint-staged": {
+    "*.{js,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ]
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.1.0",
     "@types/minimist": "^1.2.5",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
+    "@vitest/eslint-plugin": "^1.4.0",
     "commitizen": "^4.3.1",
     "cross-spawn": "^7.0.6",
     "cz-customizable": "^7.5.1",
+    "eslint": "^9.38.0",
+    "eslint-plugin-import-x": "^4.16.1",
     "kolorist": "^1.8.0",
+    "lint-staged": "^16.2.6",
     "minimist": "^1.2.8",
     "picocolors": "^1.1.1",
+    "prettier": "^3.6.2",
     "prompts": "^2.4.2",
     "rolldown": "1.0.0-beta.45",
     "rollup-plugin-license": "^3.6.0",
+    "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.15.12",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
+    "typescript-eslint": "^8.46.2",
     "unbuild": "^3.6.1"
   },
   "dependencies": {
