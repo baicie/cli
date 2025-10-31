@@ -22,6 +22,7 @@ export default defineConfig({
       include: ['packages/*/src/**'],
       exclude: [],
     },
+    exclude: ['**/templates/**'],
     projects: [
       {
         extends: true,
