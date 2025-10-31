@@ -71,7 +71,7 @@ jobs:
           node-version-file: '.node-version'
           cache: 'pnpm'
 
-      # - run: pnpm install
+      - run: pnpm install
       # - run: node node_modules/puppeteer/install.mjs
 
       - name: Run e2e tests
