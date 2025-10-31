@@ -20,7 +20,7 @@ export async function ask(options: IProjectConf) {
   options.description = await askDescription();
   options.npm = (await askNpm()) as IProjectConf["npm"];
   options.templateSource = await askTemplateSource();
-  console.log("options.templateSource", options.templateSource);
+  options.logger.debug("options.templateSource", options.templateSource);
   if (options.templateSource === "self-input")
     options.templateSource = await askSelfInputTemplateSource();
 
