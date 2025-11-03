@@ -37,7 +37,7 @@ cli
   })
   .option('-gr, --git-remote <git-remote>', 'git remote of the project')
   .action(async (root: string, options: IProjectConf) => {
-    const logger = createLogger({ debug: options.debug })
+    const logger = createLogger({ debug: options.debug, prefix: '[create]' })
     logger.success(`start a new project ${root}`)
     logger.success(`options is ${JSON.stringify(options)}`)
     try {
@@ -50,27 +50,33 @@ cli
 
 cli
   .command('pkg [root]', 'Format or create package.json file')
-  .option('-c, --create', 'Create a new package.json file')
-  .option('-f, --format', 'Format existing package.json file', {
+  .option('-c, --create', 'Create a new package.json file', {
     default: true,
   })
+  .option('-f, --format', 'Format existing package.json file', {
+    default: false,
+  })
+  .option('-p, --preset <preset>', 'Preset of the project')
   .option('-n, --name <name>', 'Package name (for create)')
   .option('-v, --version <version>', 'Package version (for create)', {
-    default: '1.0.0',
+    default: '0.1.0',
   })
   .option(
     '-des, --description <description>',
     'Package description (for create)',
   )
   .action(async (root: string = '.', options: IPkgOptions) => {
-    const logger = createLogger({ debug: options.debug || false })
+    const logger = createLogger({
+      debug: options.debug || false,
+      prefix: '[pkg]',
+    })
     const targetDir = resolve(process.cwd(), root)
     const pkgPath = resolve(targetDir, 'package.json')
 
     try {
-      pkg(options, logger, pkgPath)
+      await pkg(options, logger, pkgPath)
     } catch (error) {
-      logger.error(chalk.red(`Failed to process package.json: ${error}`))
+      logger.error(`Failed to process package.json: ${error}`)
     }
   })
 
