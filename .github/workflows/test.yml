@@ -60,6 +60,9 @@ jobs:
           name: build-dist
           path: .
 
+      - name: Debug paths
+        run: ls -R packages/cli
+
       - name: Run unit tests
         run: pnpm run test-unit
 
