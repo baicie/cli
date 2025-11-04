@@ -30,8 +30,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-artifacts
-          path: |
-            packages/*/dist
+          path: packages/**/dist
+          if-no-files-found: warn
           retention-days: 1
 
   unit-test:
@@ -61,6 +61,7 @@ jobs:
         with:
           name: dist-artifacts
           path: .
+          merge-multiple: true
 
       - name: Run unit tests
         run: pnpm run test-unit
