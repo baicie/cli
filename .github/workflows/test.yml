@@ -6,7 +6,36 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: .node-version
+          cache: 'pnpm'
+
+      - run: pnpm install
+
+      - run: pnpm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-artifacts
+          path: |
+            packages/*/dist
+          retention-days: 1
+
   unit-test:
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,14 +49,18 @@ jobs:
         uses: pnpm/action-setup@v4.1.0
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
       - run: pnpm install
 
-      - run: pnpm run build
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-artifacts
+          path: .
 
       - name: Run unit tests
         run: pnpm run test-unit
