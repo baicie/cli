@@ -20,6 +20,14 @@ jobs:
           node-version-file: '.node-version'
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
+
       - name: Install deps
         run: pnpm install
 
@@ -52,6 +60,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
+
       - run: pnpm install
 
       - name: Download build artifacts
@@ -70,7 +86,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        node-version: [18, 20, 22, 24]
+        node-version: [20, 22, 24]
     env:
       PUPPETEER_SKIP_DOWNLOAD: 'true'
     steps:
@@ -84,6 +100,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
 
       - run: pnpm install
 
@@ -137,6 +161,14 @@ jobs:
         with:
           node-version-file: '.node-version'
           cache: 'pnpm'
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
 
       - run: pnpm install
       - run: pnpm build
