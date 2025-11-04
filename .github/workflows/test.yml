@@ -33,6 +33,9 @@ jobs:
 
   unit-test-windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22, 24]
     env:
       PUPPETEER_SKIP_DOWNLOAD: 'true'
     steps:
@@ -41,10 +44,10 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4.1.0
 
-      - name: Install Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.node-version'
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
       - run: pnpm install
