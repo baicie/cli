@@ -16,6 +16,7 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
+    "stub": "pnpm run build",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
