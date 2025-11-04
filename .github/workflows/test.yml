@@ -58,7 +58,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build-dist
-          path: .
+          path: ./packages
 
       - name: Debug paths
         run: ls -R packages/cli
@@ -91,7 +91,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: build-dist
-          path: .
+          path: ./packages
 
       - name: Run unit tests
         run: pnpm run test-unit
