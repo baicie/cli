@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: build-dist
-          path: packages/**/dist/
+          path: packages/*/dist/**
 
   unit-test:
     needs: build
