@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: .node-version
+          node-version-file: '.node-version'
           cache: 'pnpm'
 
       - run: pnpm install
