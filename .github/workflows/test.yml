@@ -27,6 +27,8 @@ jobs:
 
       - run: pnpm install
 
+      - run: pnpm run build
+
       - name: Run unit tests
         run: pnpm run test-unit
 
