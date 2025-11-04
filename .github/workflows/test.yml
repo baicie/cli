@@ -30,7 +30,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-artifacts
-          path: packages/**/dist
+          path: |
+            packages/cli/dist
+            packages/pkg/dist
+            packages/tools/dist
+            packages/release/dist
           if-no-files-found: warn
           retention-days: 1
 
@@ -61,7 +65,15 @@ jobs:
         with:
           name: dist-artifacts
           path: .
-          merge-multiple: true
+
+      - name: Verify build artifacts
+        run: |
+          if [ ! -f packages/cli/dist/cli.js ]; then
+            echo "Error: packages/cli/dist/cli.js not found"
+            ls -la packages/cli/ || true
+            exit 1
+          fi
+          echo "Build artifacts verified successfully"
 
       - name: Run unit tests
         run: pnpm run test-unit
