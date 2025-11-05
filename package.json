@@ -24,7 +24,7 @@
     "postinstall": "pnpm stub && simple-git-hooks",
     "release": "tsx scripts/release.ts",
     "ci-publish": "tsx scripts/publish.ts",
-    "ci-docs": "pnpm build && pnpm docs-build"
+    "ci-docs": "pnpm docs-build"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged && pnpm check",
@@ -59,15 +59,15 @@
     "picocolors": "^1.1.1",
     "prettier": "^3.6.2",
     "prompts": "^2.4.2",
-    "rolldown": "1.0.0-beta.46",
+    "rolldown": "1.0.0-beta.47",
     "rollup-plugin-license": "^3.6.0",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.15.12",
+    "tsdown": "^0.16.0",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "typescript-eslint": "^8.46.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.6"
+    "vitest": "^4.0.7"
   },
   "dependencies": {
     "@pnpm/find-workspace-packages": "^6.0.9",

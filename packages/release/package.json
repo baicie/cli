@@ -34,7 +34,7 @@
     "prompts": "^2.4.2",
     "publint": "^0.3.15",
     "semver": "^7.7.3",
-    "tinyexec": "^1.0.1"
+    "tinyexec": "^1.0.2"
   },
   "devDependencies": {
     "@arnaud-barre/tnode": "^0.25.0",
@@ -45,7 +45,7 @@
     "fs-fixture": "^2.10.1",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.6"
+    "vitest": "^4.0.7"
   },
   "publishConfig": {
     "access": "public",
