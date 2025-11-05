@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  parseQuery,
-  stringifyQuery,
   addQuery,
-  removeQuery,
-  getQueryParam,
+  decodeUrl,
+  encodeUrl,
   getDomain,
-  getProtocol,
+  getFileExtension,
   getPath,
+  getProtocol,
+  getQueryParam,
   isAbsoluteUrl,
   joinUrl,
-  encodeUrl,
-  decodeUrl,
-  getFileExtension,
+  parseQuery,
+  removeQuery,
+  stringifyQuery,
 } from '../src/url'
 
 describe('parseQuery', () => {

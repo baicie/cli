@@ -111,6 +111,7 @@ export default tseslint.config(
       '.idea/',
       'packages/*/templates/**',
       '**/templates/**',
+      'docs/.vitepress/cache/**',
     ],
   },
 )

@@ -1,13 +1,13 @@
-import { describe, it, expect } from 'vitest'
-import { getPackageInfo, updateVersion, compareVersions } from '../src/utils'
-import { readFileSync, writeFileSync, existsSync } from 'fs'
-import { join } from 'path'
-import { tmpdir } from 'os'
+import { describe, expect, it } from 'vitest'
+import { getPackageInfo, updateVersion } from '../src/utils'
+import { readFileSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { tmpdir } from 'node:os'
 
 describe('getPackageInfo', () => {
   it('应该读取package.json信息', () => {
     const tempDir = tmpdir()
-    const pkgPath = join(tempDir, 'package.json')
+    const pkgPath = path.join(tempDir, 'package.json')
     const pkgData = {
       name: 'test-package',
       version: '1.0.0',
@@ -23,7 +23,7 @@ describe('getPackageInfo', () => {
 
   it('应该在包为私有时抛出错误', () => {
     const tempDir = tmpdir()
-    const pkgPath = join(tempDir, 'package.json')
+    const pkgPath = path.join(tempDir, 'package.json')
     const pkgData = {
       name: 'test-package',
       version: '1.0.0',
@@ -41,7 +41,7 @@ describe('getPackageInfo', () => {
 describe('updateVersion', () => {
   it('应该更新版本号', () => {
     const tempDir = tmpdir()
-    const pkgPath = join(tempDir, 'package.json')
+    const pkgPath = path.join(tempDir, 'package.json')
     const pkgData = {
       name: 'test-package',
       version: '1.0.0',

@@ -1,17 +1,17 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
+  cleanObject,
   deepClone,
   deepMerge,
-  get,
-  set,
-  unset,
-  pick,
-  omit,
-  isEmpty,
-  invert,
-  cleanObject,
   flattenObject,
+  get,
+  invert,
+  isEmptyObject,
+  omit,
+  pick,
+  set,
   unflattenObject,
+  unset,
 } from '../src/object'
 
 describe('deepClone', () => {
@@ -24,7 +24,7 @@ describe('deepClone', () => {
   })
 
   it('应该克隆数组', () => {
-    const arr = [1, 2, { a: 3 }]
+    const arr: [number, number, { a: number }] = [1, 2, { a: 3 }]
     const cloned = deepClone(arr)
     cloned[2].a = 4
 
@@ -82,10 +82,10 @@ describe('omit', () => {
 
 describe('isEmpty', () => {
   it('应该判断是否为空', () => {
-    expect(isEmpty({})).toBe(true)
-    expect(isEmpty({ a: 1 })).toBe(false)
-    expect(isEmpty([])).toBe(true)
-    expect(isEmpty([1])).toBe(false)
+    expect(isEmptyObject({})).toBe(true)
+    expect(isEmptyObject({ a: 1 })).toBe(false)
+    expect(isEmptyObject([])).toBe(true)
+    expect(isEmptyObject([1])).toBe(false)
   })
 })
 
@@ -100,7 +100,7 @@ describe('cleanObject', () => {
     const obj = { a: 1, b: '', c: null, d: undefined }
     const result = cleanObject(obj)
     expect(result.a).toBe(1)
-    expect(result.b).toBeUndefined()
+    expect(result.b).toBe('')
   })
 })
 

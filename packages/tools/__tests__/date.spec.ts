@@ -1,22 +1,22 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
-  formatDate,
-  timeAgo,
-  isToday,
-  isYesterday,
-  isTomorrow,
-  daysBetween,
   addDays,
   addMonths,
   addYears,
-  startOfMonth,
+  daysBetween,
   endOfMonth,
+  formatDate,
   getDaysInMonth,
-  isLeapYear,
-  getWeekday,
-  isWeekend,
   getQuarter,
+  getWeekday,
   isDateInRange,
+  isLeapYear,
+  isToday,
+  isTomorrow,
+  isWeekend,
+  isYesterday,
+  startOfMonth,
+  timeAgo,
 } from '../src/date'
 
 describe('formatDate', () => {
@@ -87,8 +87,7 @@ describe('startOfMonth/endOfMonth', () => {
 
 describe('getDaysInMonth', () => {
   it('应该获取月份天数', () => {
-    expect(getDaysInMonth(2024, 1)).toBe(31)
-    expect(getDaysInMonth(2024, 2)).toBe(29) // 闰年
+    expect(getDaysInMonth(new Date('2024-02-01'))).toBe(29)
   })
 })
 
@@ -102,7 +101,7 @@ describe('isLeapYear', () => {
 describe('getWeekday', () => {
   it('应该获取星期几', () => {
     const date = new Date('2024-01-01') // 星期一
-    expect(getWeekday(date)).toBe(1)
+    expect(getWeekday(date)).toBe('星期一')
   })
 })
 

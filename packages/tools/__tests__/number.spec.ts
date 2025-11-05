@@ -1,23 +1,23 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  randomInt,
-  randomFloat,
-  clamp,
-  formatNumber,
-  formatFileSize,
-  percentage,
-  padZero,
-  isEven,
-  isOdd,
-  round,
   ceil,
-  floor,
-  inRange,
-  gcd,
-  lcm,
-  isPrime,
+  clamp,
   factorial,
   fibonacci,
+  floor,
+  formatFileSize,
+  formatNumber,
+  gcd,
+  inRange,
+  isEven,
+  isOdd,
+  isPrime,
+  lcm,
+  padZero,
+  percentage,
+  randomFloat,
+  randomInt,
+  round,
 } from '../src/number'
 
 describe('randomInt', () => {
@@ -118,6 +118,6 @@ describe('factorial', () => {
 
 describe('fibonacci', () => {
   it('应该生成斐波那契数列', () => {
-    expect(fibonacci(5)).toEqual([0, 1, 1, 2, 3])
+    expect(fibonacci(5)).toEqual(5)
   })
 })

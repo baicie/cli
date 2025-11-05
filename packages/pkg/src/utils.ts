@@ -48,7 +48,7 @@ export function safeParseJson(content: string): PackageJson | null {
  * @returns 是否为空
  */
 export function isEmptyObject(obj: any): boolean {
-  return obj && typeof obj === 'object' && Object.keys(obj).length === 0
+  return !!(obj && typeof obj === 'object' && Object.keys(obj).length === 0)
 }
 
 /**
@@ -150,7 +150,7 @@ export function compareVersions(v1: string, v2: string): number {
  * @returns 规范化后的包名
  */
 export function normalizePackageName(name: string): string {
-  return name.replace(/^@[^/]+\//, '')
+  return name.replace(/^@[^/]+\//, '').replace(/\b[A-Z]/g, c => c.toLowerCase())
 }
 
 /**

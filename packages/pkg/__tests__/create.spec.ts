@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  createPackageJson,
-  createPackageJsonString,
   clonePackageJson,
   createMinimalPackageJson,
+  createPackageJson,
+  createPackageJsonString,
 } from '../src/create'
 
 describe('createPackageJson', () => {

@@ -1,17 +1,17 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  addDependency,
-  removeDependency,
-  updateDependencyVersion,
-  addScript,
-  removeScript,
   addDependencies,
-  removeDependencies,
-  setField,
-  removeField,
+  addDependency,
   addKeywords,
-  removeKeywords,
+  addScript,
   bumpVersion,
+  removeDependencies,
+  removeDependency,
+  removeField,
+  removeKeywords,
+  removeScript,
+  setField,
+  updateDependencyVersion,
 } from '../src/manipulate'
 import { createPackageJson } from '../src/create'
 

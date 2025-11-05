@@ -1,20 +1,20 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  capitalize,
+  byteLength,
   camelToKebab,
-  kebabToCamel,
-  snakeToCamel,
   camelToSnake,
+  capitalize,
+  escapeHtml,
+  hasChinese,
+  isPalindrome,
+  kebabToCamel,
+  randomStr,
+  reverse,
+  snakeToCamel,
+  stripHtml,
+  template,
   toPascalCase,
   truncate,
-  stripHtml,
-  escapeHtml,
-  randomString,
-  reverse,
-  isPalindrome,
-  template,
-  hasChinese,
-  byteLength,
 } from '../src/string'
 
 describe('capitalize', () => {
@@ -84,7 +84,7 @@ describe('escapeHtml', () => {
 
 describe('randomString', () => {
   it('应该生成随机字符串', () => {
-    const str = randomString(10)
+    const str = randomStr(10)
     expect(str).toHaveLength(10)
   })
 })
@@ -104,7 +104,7 @@ describe('isPalindrome', () => {
 
 describe('template', () => {
   it('应该替换模板变量', () => {
-    expect(template('Hello {{name}}', { name: 'World' })).toBe('Hello World')
+    expect(template('Hello {name}', { name: 'World' })).toBe('Hello World')
   })
 })
 

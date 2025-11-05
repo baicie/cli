@@ -1,17 +1,16 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
-  debounce,
-  throttle,
-  once,
-  memoize,
-  curry,
+  before,
   compose,
-  pipe,
-  partial,
+  curry,
+  debounce,
   measure,
   measureAsync,
-  before,
-  after,
+  memoize,
+  once,
+  partial,
+  pipe,
+  throttle,
 } from '../src/function'
 
 describe('debounce', () => {
@@ -138,7 +137,7 @@ describe('measure', () => {
     }
     const result = measure(fn)
     expect(result.time).toBeGreaterThan(0)
-    expect(result.result).toBe(499500)
+    expect(result.value).toBe(499500)
   })
 })
 
@@ -150,7 +149,7 @@ describe('measureAsync', () => {
     }
     const result = await measureAsync(fn)
     expect(result.time).toBeGreaterThan(0)
-    expect(result.result).toBe(42)
+    expect(result.value).toBe(42)
   })
 })
 

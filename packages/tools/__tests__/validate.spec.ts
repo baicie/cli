@@ -1,20 +1,20 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  isEmail,
-  isPhone,
-  isIdCard,
-  isUrl,
-  isIPv4,
-  isIPv6,
-  isMac,
-  isCreditCard,
-  isStrongPassword,
-  isUsername,
+  isBase64,
   isChinese,
+  isCreditCard,
+  isEmail,
   isEnglish,
   isHexColor,
-  isBase64,
+  isIPv4,
+  isIPv6,
+  isIdCard,
   isJSON,
+  isMac,
+  isPhone,
+  isStrongPassword,
+  isUrl,
+  isUsername,
 } from '../src/validate'
 
 describe('isEmail', () => {

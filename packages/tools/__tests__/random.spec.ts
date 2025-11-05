@@ -1,18 +1,18 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  randomId,
-  uuid,
-  randomColor,
-  randomRgb,
-  randomRgba,
-  randomDate,
   randomBoolean,
   randomByWeight,
-  shuffleArray,
   randomChineseName,
-  randomPhone,
+  randomColor,
+  randomDate,
   randomEmail,
   randomIP,
+  randomId,
+  randomPhone,
+  randomRgb,
+  randomRgba,
+  shuffleArray,
+  uuid,
 } from '../src/random'
 
 describe('randomId', () => {

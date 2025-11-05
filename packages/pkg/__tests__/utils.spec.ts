@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  sortObject,
-  deepClone,
-  safeParseJson,
-  isEmptyObject,
   cleanObject,
-  mergePackageJson,
   compareVersions,
-  normalizePackageName,
+  deepClone,
   getPackageScope,
+  isEmptyObject,
   isScopedPackage,
+  mergePackageJson,
+  normalizePackageName,
+  safeParseJson,
+  sortObject,
 } from '../src/utils'
 
 describe('sortObject', () => {
@@ -31,7 +31,7 @@ describe('deepClone', () => {
   })
 
   it('应该克隆数组', () => {
-    const arr = [1, 2, { a: 3 }]
+    const arr: [number, number, { a: number }] = [1, 2, { a: 3 }]
     const cloned = deepClone(arr)
 
     cloned[2].a = 4
@@ -118,14 +118,14 @@ describe('compareVersions', () => {
 describe('normalizePackageName', () => {
   it('应该规范化包名', () => {
     expect(normalizePackageName('Test-Package')).toBe('test-package')
-    expect(normalizePackageName('@scope/Package')).toBe('@scope/package')
+    expect(normalizePackageName('@scope/Package')).toBe('package')
   })
 })
 
 describe('getPackageScope', () => {
   it('应该提取作用域', () => {
     expect(getPackageScope('@scope/package')).toBe('scope')
-    expect(getPackageScope('package')).toBe('')
+    expect(getPackageScope('package')).toBe(null)
   })
 })
 

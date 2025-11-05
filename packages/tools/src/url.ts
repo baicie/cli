@@ -64,8 +64,13 @@ export function removeQuery(url: string, keys: string[]): string {
     params.delete(key)
   }
 
-  urlObj.search = params.toString()
-  return urlObj.toString()
+  const queryString = params.toString()
+  // 手动拼接 origin + pathname (去掉 URL 类自动添加的 '/') + query
+  const pathname = urlObj.pathname === '/' ? '' : urlObj.pathname
+
+  return queryString
+    ? `${urlObj.origin}${pathname}?${queryString}`
+    : `${urlObj.origin}${pathname}`
 }
 
 /**
@@ -182,11 +187,11 @@ export function decodeUrl(str: string): string {
  * getFileExtension('https://example.com/file.pdf') // 'pdf'
  */
 export function getFileExtension(url: string): string {
-  const path = getPath(url)
-  const lastDot = path.lastIndexOf('.')
-  return lastDot !== -1 ? path.slice(lastDot + 1) : ''
+  const path = url.split(/[?#]/)[0]
+  const baseName = path.split('/').pop() || ''
+  const lastDot = baseName.lastIndexOf('.')
+  return lastDot > 0 ? baseName.slice(lastDot + 1) : ''
 }
-
 /**
  * 判断是否为同域 URL
  * @example

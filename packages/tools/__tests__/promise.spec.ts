@@ -1,14 +1,14 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
-  sleep,
-  timeout,
-  retry,
-  promisePool,
   allSettled,
-  serial,
   cancellable,
   createDeferred,
   poll,
+  promisePool,
+  retry,
+  serial,
+  sleep,
+  timeout,
 } from '../src/promise'
 
 describe('sleep', () => {
@@ -112,11 +112,12 @@ describe('serial', () => {
 
 describe('cancellable', () => {
   it('应该支持取消', async () => {
-    const promise = sleep(1000)
-    const { cancel } = cancellable(promise)
+    const original = sleep(1000)
+    const { promise, cancel } = cancellable(original)
 
     cancel()
-    await expect(promise).rejects.toThrow()
+
+    await expect(promise).rejects.toThrow('Cancelled')
   })
 })
 

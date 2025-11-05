@@ -1,20 +1,20 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
-  unique,
-  uniqueBy,
-  groupBy,
-  chunk,
-  shuffle,
-  sum,
   average,
-  intersection,
-  difference,
-  union,
+  chunk,
   compact,
+  difference,
   flatten,
+  groupBy,
+  intersection,
+  paginate,
   sample,
   sampleSize,
-  paginate,
+  shuffle,
+  sum,
+  union,
+  unique,
+  uniqueBy,
 } from '../src/array'
 
 describe('unique', () => {
@@ -66,8 +66,8 @@ describe('shuffle', () => {
     const arr = [1, 2, 3, 4, 5]
     const shuffled = shuffle(arr)
     expect(shuffled).toHaveLength(5)
+    expect(shuffled).not.toEqual(arr)
     expect(shuffled.sort()).toEqual([1, 2, 3, 4, 5])
-    expect(shuffled).not.toEqual(arr) // 可能相同，但概率很小
   })
 })
 
