@@ -155,3 +155,7 @@ dist
 # temp
 templates
 temp
+
+# VitePress build output
+docs/.vitepress/dist
+docs/.vitepress/cache

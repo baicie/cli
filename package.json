@@ -15,11 +15,16 @@
     "test-unit": "vitest --project unit*",
     "test-e2e": "vitest --project e2e",
     "test-coverage": "vitest run --project unit* --coverage",
+    "test-docs": "pnpm run docs-build",
+    "docs": "pnpm --filter=./docs run docs",
+    "docs-build": "pnpm --filter=./docs run docs-build",
+    "docs-serve": "pnpm --filter=./docs run docs-serve",
     "stub": "pnpm run -r --parallel stub",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "pnpm stub && simple-git-hooks",
     "release": "tsx scripts/release.ts",
-    "ci-publish": "tsx scripts/publish.ts"
+    "ci-publish": "tsx scripts/publish.ts",
+    "ci-docs": "pnpm build && pnpm docs-build"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged && pnpm check",

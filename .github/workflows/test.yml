@@ -182,5 +182,8 @@ jobs:
       - name: Run tsc
         run: pnpm run check
 
+      - name: Run docs
+        run: pnpm run docs-build
+
       # - name: Run type declaration tests
       #   run: pnpm run test-dts
