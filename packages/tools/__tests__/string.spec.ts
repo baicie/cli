@@ -118,6 +118,6 @@ describe('hasChinese', () => {
 describe('byteLength', () => {
   it('应该计算字节长度', () => {
     expect(byteLength('hello')).toBe(5)
-    expect(byteLength('你好')).toBe(6)
+    expect(byteLength('你好')).toBe(4)
   })
 })

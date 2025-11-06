@@ -50,7 +50,7 @@ bca pkg [目录] [选项]
 - `-f, --format` - 格式化现有的 package.json 文件 (默认: false)
 - `-p, --preset <preset>` - 项目预设
 - `-n, --name <name>` - 包名 (用于创建)
-- `-v, --version <version>` - 包版本 (用于创建，默认: 0.1.0)
+- `--version <version>` - 包版本 (用于创建，默认: 0.1.0)
 - `-des, --description <description>` - 包描述 (用于创建)
 
 ### 示例

@@ -148,7 +148,9 @@ describe('poll', () => {
     }
 
     const promise = poll(check, update, 100)
-    vi.advanceTimersByTime(600)
+
+    await vi.runAllTimersAsync()
+
     await promise
 
     expect(value).toBeGreaterThanOrEqual(5)

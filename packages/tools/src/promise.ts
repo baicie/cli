@@ -179,6 +179,10 @@ export function createDeferred<T>(): {
 /**
  * 轮询执行直到满足条件
  * @example
+ * // 同步轮询
+ * await poll(() => value >= 5, () => value++, 100)
+ *
+ * // 异步轮询
  * await poll(
  *   () => fetch('/api/status').then(r => r.json()),
  *   data => data.status === 'ready',
@@ -186,11 +190,42 @@ export function createDeferred<T>(): {
  * )
  */
 export async function poll<T>(
+  check: () => boolean,
+  update: () => void,
+  interval: number,
+): Promise<void>
+export async function poll<T>(
   fn: () => Promise<T>,
   validate: (result: T) => boolean,
-  options: { interval?: number; timeout?: number } = {},
-): Promise<T> {
-  const { interval = 1000, timeout = 60000 } = options
+  options: { interval?: number; timeout?: number },
+): Promise<T>
+export async function poll<T>(
+  checkOrFn: (() => boolean) | (() => Promise<T>),
+  updateOrValidate: (() => void) | ((result: T) => boolean),
+  intervalOrOptions: number | { interval?: number; timeout?: number } = {},
+): Promise<T | void> {
+  // 同步轮询：check, update, interval
+  if (typeof intervalOrOptions === 'number') {
+    const check = checkOrFn as () => boolean
+    const update = updateOrValidate as () => void
+    const interval = intervalOrOptions
+
+    while (true) {
+      update()
+      if (check()) {
+        return
+      }
+      await sleep(interval)
+    }
+  }
+
+  // 异步轮询：fn, validate, options
+  const fn = checkOrFn as () => Promise<T>
+  const validate = updateOrValidate as (result: T) => boolean
+  const { interval = 1000, timeout = 60000 } = intervalOrOptions as {
+    interval?: number
+    timeout?: number
+  }
   const startTime = Date.now()
 
   while (true) {

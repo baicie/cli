@@ -13,7 +13,6 @@ describe('CLI E2E - 项目创建', () => {
   beforeAll(async () => {
     // 确保测试目录存在
     await fs.ensureDir(testDir)
-    process.chdir(testDir)
   })
 
   afterAll(async () => {
@@ -79,7 +78,6 @@ describe('CLI E2E - 项目创建', () => {
     )
 
     // 验证 README 可能存在（取决于模板）
-    const readmePath = path.join(projectPath, 'README.md')
     // README 可能不存在，所以不强制要求
   }, 30000)
 
@@ -104,9 +102,10 @@ describe('CLI E2E - 项目创建', () => {
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     // 验证 .git 目录存在
-    const gitPath = path.join(projectPath, '.git')
     // 注意：Git 初始化是异步的，可能需要等待
     // 在实际测试中可能需要更长的等待时间或使用轮询
+    const gitPath = path.join(projectPath, '.git')
+    expect(await fs.pathExists(gitPath)).toBe(true)
   }, 30000)
 
   it('应该能够处理不同的模板', async () => {

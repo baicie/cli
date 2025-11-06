@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { execaCommand } from 'execa'
+import { execa, execaCommand } from 'execa'
 import fs from 'fs-extra'
 import path from 'node:path'
 import { tmpdir } from 'node:os'
@@ -11,29 +11,44 @@ describe('CLI E2E - pkg 命令', () => {
 
   beforeAll(async () => {
     await fs.ensureDir(testDir)
-    process.chdir(testDir)
   })
 
   afterAll(async () => {
     if (await fs.pathExists(testDir)) {
-      await fs.remove(testDir)
+      // await fs.remove(testDir)
     }
   })
 
   it('应该能够创建 package.json', async () => {
     const testProjectDir = path.join(testDir, 'pkg-test')
+    console.log('testProjectDir', testProjectDir)
     await fs.ensureDir(testProjectDir)
-    process.chdir(testProjectDir)
 
-    // 执行 pkg 创建命令
-    const { stdout, exitCode } = await execaCommand(
-      `node ${CLI_PATH} pkg --create --name test-package --version 1.0.0`,
+    // 执行 pkg 创建命令（使用数组形式避免引号解析问题）
+    const { exitCode, stderr, stdout } = await execa(
+      'node',
+      [
+        CLI_PATH,
+        'pkg',
+        '--create',
+        '--name',
+        'test-package',
+        '--pkg-version',
+        '1.0.0',
+        '--description',
+        'Test package',
+        '--preset',
+        'basic',
+        '--debug',
+      ],
       {
         cwd: testProjectDir,
         env: { ...process.env, CI: 'true' },
       },
     )
-
+    console.log('testProjectDir', testProjectDir)
+    console.log('stderr', stderr)
+    console.log('stdout', stdout)
     // 验证命令执行成功
     expect(exitCode).toBe(0)
 
@@ -50,7 +65,6 @@ describe('CLI E2E - pkg 命令', () => {
   it('应该能够格式化现有的 package.json', async () => {
     const testProjectDir = path.join(testDir, 'pkg-format-test')
     await fs.ensureDir(testProjectDir)
-    process.chdir(testProjectDir)
 
     // 创建未格式化的 package.json
     const pkgPath = path.join(testProjectDir, 'package.json')

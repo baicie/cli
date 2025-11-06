@@ -37,13 +37,34 @@ export function throttle<T extends (...args: any[]) => any>(
   delay: number,
 ): (...args: Parameters<T>) => void {
   let lastCall = 0
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
 
   return function (this: any, ...args: Parameters<T>) {
     const now = Date.now()
 
     if (now - lastCall >= delay) {
+      // Leading edge: 立即执行
       lastCall = now
       fn.apply(this, args)
+
+      // 清除之前的延迟执行
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+        timeoutId = null
+      }
+    } else {
+      // Trailing edge: 安排延迟执行最后一次调用
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+      timeoutId = setTimeout(
+        () => {
+          lastCall = Date.now()
+          fn.apply(this, args)
+          timeoutId = null
+        },
+        delay - (now - lastCall),
+      )
     }
   }
 }

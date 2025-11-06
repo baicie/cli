@@ -58,20 +58,21 @@ cli
   })
   .option('-p, --preset <preset>', 'Preset of the project')
   .option('-n, --name <name>', 'Package name (for create)')
-  .option('-v, --version <version>', 'Package version (for create)', {
+  .option('-pv, --pkg-version <pkg-version>', 'Package version (for create)', {
     default: '0.1.0',
   })
-  .option(
-    '-des, --description <description>',
-    'Package description (for create)',
-  )
+  .option('--description <description>', 'Package description (for create)')
   .action(async (root: string = '.', options: IPkgOptions) => {
     const logger = createLogger({
       debug: options.debug || false,
       prefix: '[pkg]',
     })
+    logger.debug(`root parameter: ${JSON.stringify(root)}`)
+    logger.debug(`process.cwd(): ${process.cwd()}`)
     const targetDir = resolve(process.cwd(), root)
+    logger.debug(`targetDir: ${targetDir}`)
     const pkgPath = resolve(targetDir, 'package.json')
+    logger.debug(`pkgPath: ${pkgPath}`)
 
     try {
       await pkg(options, logger, pkgPath)

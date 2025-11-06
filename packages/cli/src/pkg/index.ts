@@ -16,7 +16,7 @@ export interface IPkgOptions {
   create?: boolean
   format?: boolean
   name?: string
-  version?: string
+  pkgVersion?: string
   description?: string
   debug?: boolean
   preset?: 'basic' | 'library'
@@ -35,7 +35,7 @@ export async function pkg(
 
     // 如果缺少必要参数，使用交互式步骤询问
     let name = options.name
-    let version = options.version
+    let version = options.pkgVersion
     let description = options.description
     let preset = options.preset
 
