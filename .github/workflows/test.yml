@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 20, 22, 24]
+        node-version: [20, 22, 24]
     env:
       PUPPETEER_SKIP_DOWNLOAD: 'true'
     steps:
@@ -86,7 +86,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        node-version: [18, 20, 22, 24]
+        node-version: [20, 22, 24]
     env:
       PUPPETEER_SKIP_DOWNLOAD: 'true'
     steps:
