@@ -464,8 +464,8 @@ if (
 ) {
   win.fetch = fetchBrowser
   // eslint-disable-next-line no-console
-  console.log('fetch polyfilled')
+  console.log('polyfilled fetch')
 } else {
   // eslint-disable-next-line no-console
-  console.log('fetch already polyfilled')
+  console.log('no need to polyfill fetch')
 }
