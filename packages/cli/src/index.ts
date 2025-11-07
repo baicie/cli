@@ -25,7 +25,7 @@ export async function ask(options: IProjectConf): Promise<IProjectConf> {
     options.templateSource = await askSelfInputTemplateSource()
 
   // 下载模板并返回列表
-  const templates = await fetchTemplates(options, options)
+  const templates = await fetchTemplates(options)
   options.template = await askTemplate(templates)
 
   // 询问是否需要初始化 Git 仓库

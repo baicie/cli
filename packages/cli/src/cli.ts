@@ -38,8 +38,8 @@ cli
   .option('-gr, --git-remote <git-remote>', 'git remote of the project')
   .action(async (root: string, options: IProjectConf) => {
     const logger = createLogger({ debug: options.debug, prefix: '[create]' })
-    logger.success(`start a new project ${root}`)
-    logger.success(`options is ${JSON.stringify(options)}`)
+    logger.debug(`start a new project ${root}`)
+    logger.debug(`options is ${JSON.stringify(options)}`)
     try {
       const answers = await ask({ ...options, projectName: root, logger })
       await write(answers)

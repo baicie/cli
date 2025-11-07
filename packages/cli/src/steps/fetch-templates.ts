@@ -4,7 +4,6 @@ import type { IProjectConf } from './types'
 
 export async function fetchTemplates(
   conf: IProjectConf,
-  options: IProjectConf,
 ): Promise<ITemplates[]> {
   const { templateSource, logger } = conf
   logger.debug(`templateSource: ${templateSource}`)
@@ -15,11 +14,7 @@ export async function fetchTemplates(
   }
 
   // templates
-  const templates = await fetchTemplate(
-    conf.templateSource,
-    templateRoot,
-    options,
-  )
+  const templates = await fetchTemplate(conf.templateSource, templateRoot, conf)
   // 筛选
   return templates
 }
