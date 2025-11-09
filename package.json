@@ -46,7 +46,7 @@
     "@types/node": "^24.10.0",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
-    "@vitest/eslint-plugin": "^1.4.0",
+    "@vitest/eslint-plugin": "^1.4.1",
     "commitizen": "^4.3.1",
     "cross-spawn": "^7.0.6",
     "cz-customizable": "^7.5.1",
@@ -63,13 +63,13 @@
     "rolldown": "1.0.0-beta.47",
     "rollup-plugin-license": "^3.6.0",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.16.0",
+    "tsdown": "^0.16.1",
     "tsup": "^8.5.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.3",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.7"
+    "vitest": "^4.0.8"
   },
   "dependencies": {
     "@pnpm/find-workspace-packages": "^6.0.9",
