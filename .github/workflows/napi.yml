@@ -1,4 +1,5 @@
 name: 'napi'
+
 env:
   DEBUG: napi:*
   APP_NAME: 'baicie-napi'
