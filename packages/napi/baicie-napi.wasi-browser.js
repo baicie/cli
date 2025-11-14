@@ -1,18 +1,16 @@
 import {
-  createOnMessage as __wasmCreateOnMessageForFsProxy,
+  WASI as __WASI,
   getDefaultContext as __emnapiGetDefaultContext,
   instantiateNapiModuleSync as __emnapiInstantiateNapiModuleSync,
-  WASI as __WASI,
+  createOnMessage as __wasmCreateOnMessageForFsProxy,
 } from '@napi-rs/wasm-runtime'
 
 const __wasi = new __WASI({
   version: 'preview1',
 })
 
-const __wasmUrl = new URL(
-  './package-template.wasm32-wasi.wasm',
-  import.meta.url,
-).href
+const __wasmUrl = new URL('./baicie-napi.wasm32-wasi.wasm', import.meta.url)
+  .href
 const __emnapiContext = __emnapiGetDefaultContext()
 
 const __sharedMemory = new WebAssembly.Memory({

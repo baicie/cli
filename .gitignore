@@ -163,3 +163,4 @@ docs/.vitepress/cache
 # napi
 /target
 Cargo.lock
+*.node

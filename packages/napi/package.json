@@ -28,13 +28,8 @@
     "bench": "node --import @oxc-node/core/register benchmark/bench.ts",
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
-    "format": "run-p format:prettier format:rs format:toml",
-    "format:prettier": "prettier . -w",
-    "format:toml": "taplo format",
-    "format:rs": "cargo fmt",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "ava",
-    "preversion": "napi build --platform && git add ."
+    "test": "ava"
   },
   "engines": {
     "node": ">=20"
@@ -46,7 +41,6 @@
     "@oxc-node/core": "^0.0.34",
     "@tybys/wasm-util": "^0.10.0",
     "ava": "^6.4.1",
-    "npm-run-all2": "^8.0.4",
     "tinybench": "^5.0.1"
   },
   "publishConfig": {
