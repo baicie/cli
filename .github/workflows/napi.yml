@@ -149,7 +149,9 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: ${{ matrix.settings.build }}
+        run: |
+          pwd
+          ${{ matrix.settings.build }}
         shell: bash
         working-directory: ./packages/napi
 
