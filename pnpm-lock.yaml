@@ -205,9 +205,6 @@ importers:
       ava:
         specifier: ^6.4.1
         version: 6.4.1(rollup@4.52.4)
-      npm-run-all2:
-        specifier: ^8.0.4
-        version: 8.0.4
       tinybench:
         specifier: ^5.0.1
         version: 5.1.0
