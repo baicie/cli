@@ -94,6 +94,7 @@ export default tseslint.config(
       'vitest.config.{js,ts}',
       'scripts/**',
       'packages/*/*.config.{js,ts}',
+      'packages/napi/benchmark/*.{js,ts}',
     ],
     rules: {
       'no-restricted-globals': 'off',

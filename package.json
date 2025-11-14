@@ -32,16 +32,20 @@
     "commit-msg": "node scripts/verify-commit.js"
   },
   "lint-staged": {
-    "*.{js,json}": [
+    "*.{js|ts|tsx|yml|yaml|md|json}": [
       "prettier --write"
     ],
     "*.ts?(x)": [
       "eslint --fix",
       "prettier --parser=typescript --write"
+    ],
+    "*.toml": [
+      "taplo format"
     ]
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
+    "@taplo/cli": "^0.7.0",
     "@types/minimist": "^1.2.5",
     "@types/node": "^24.10.0",
     "@types/prompts": "^2.4.9",

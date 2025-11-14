@@ -159,3 +159,7 @@ temp
 # VitePress build output
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# napi
+/target
+Cargo.lock
