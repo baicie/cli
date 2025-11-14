@@ -1,8 +1,8 @@
 import {
-  WASI as __WASI,
+  createOnMessage as __wasmCreateOnMessageForFsProxy,
   getDefaultContext as __emnapiGetDefaultContext,
   instantiateNapiModuleSync as __emnapiInstantiateNapiModuleSync,
-  createOnMessage as __wasmCreateOnMessageForFsProxy,
+  WASI as __WASI,
 } from '@napi-rs/wasm-runtime'
 
 const __wasi = new __WASI({
