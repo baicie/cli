@@ -261,8 +261,10 @@ jobs:
       - name: List packages
         run: ls -R .
         shell: bash
+
       - name: Test bindings
         run: pnpm test
+        working-directory: packages/napi
 
   test-linux-binding:
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
@@ -342,6 +344,7 @@ jobs:
           image: ${{ steps.docker.outputs.IMAGE }}
           options: '-v ${{ github.workspace }}:${{ github.workspace }} -w ${{ github.workspace }} --platform ${{ steps.docker.outputs.PLATFORM }}'
           run: pnpm test
+          working-directory: packages/napi
   test-wasi:
     name: Test WASI target
     needs:
@@ -376,6 +379,7 @@ jobs:
         run: pnpm test
         env:
           NAPI_RS_FORCE_WASI: 1
+        working-directory: packages/napi
   publish:
     name: Publish
     runs-on: ubuntu-latest
