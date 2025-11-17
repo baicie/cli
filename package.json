@@ -50,10 +50,10 @@
     "@antfu/eslint-config": "^6.2.0",
     "@taplo/cli": "^0.7.0",
     "@types/minimist": "^1.2.5",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@types/prompts": "^2.4.9",
     "@types/resolve": "^1.20.6",
-    "@vitest/eslint-plugin": "^1.4.2",
+    "@vitest/eslint-plugin": "^1.4.3",
     "commitizen": "^4.3.1",
     "cross-spawn": "^7.0.6",
     "cz-customizable": "^7.5.1",
@@ -71,13 +71,13 @@
     "rolldown": "1.0.0-beta.50",
     "rollup-plugin-license": "^3.6.0",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.16.4",
+    "tsdown": "^0.16.5",
     "tsup": "^8.5.1",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.4",
     "unbuild": "^3.6.1",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.9"
   },
   "dependencies": {
     "@pnpm/find-workspace-packages": "^6.0.9",

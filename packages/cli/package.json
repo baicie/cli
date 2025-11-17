@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@baicie/pkg": "workspace:*",
-    "@inquirer/prompts": "^7.10.1",
+    "@inquirer/prompts": "^8.0.1",
     "adm-zip": "^0.5.16",
     "consola": "^3.4.2",
     "fast-glob": "^3.3.3",
