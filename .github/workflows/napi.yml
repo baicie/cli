@@ -284,7 +284,6 @@ jobs:
         node:
           - '20'
           - '22'
-          - '24'
     runs-on: ${{ contains(matrix.target, 'aarch64') && 'ubuntu-24.04-arm' || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v5
@@ -314,7 +313,7 @@ jobs:
             if ('${{ matrix.target }}'.endsWith('-musl')) {
               console.log('IMAGE=node:${{ matrix.node }}-alpine')
             } else {
-              console.log('IMAGE=node:${{ matrix.node }}-bullseye')
+              console.log('IMAGE=node:${{ matrix.node }}-slim')
             }
           " >> $GITHUB_OUTPUT
 

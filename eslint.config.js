@@ -114,6 +114,7 @@ export default tseslint.config(
       '**/templates/**',
       'docs/.vitepress/cache/**',
       'packages/napi/baicie-napi.{wasi,wasi-browser}.*',
+      'packages/napi/index.d.ts',
     ],
   },
 )
