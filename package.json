@@ -70,7 +70,6 @@
     "prettier": "^3.6.2",
     "prompts": "^2.4.2",
     "rolldown": "1.0.0-beta.50",
-    "rollup-plugin-license": "^3.6.0",
     "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.16.5",
     "tsup": "^8.5.1",
