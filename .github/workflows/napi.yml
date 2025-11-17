@@ -209,7 +209,9 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: bindings-freebsd
-          path: ${{ env.APP_NAME }}.*.node
+          path: |
+            packages/napi/${{ env.APP_NAME }}.*.node
+            packages/napi/${{ env.APP_NAME }}.*.wasm
           if-no-files-found: error
 
   test-macOS-windows-binding:
