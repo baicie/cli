@@ -2,3 +2,8 @@ dist
 pnpm-lock.yaml
 CHANGELOG*.md
 target
+packages/napi/baicie-napi.wasi-browser.js
+packages/napi/baicie-napi.wasi.cjs
+packages/napi/index.js
+packages/napi/wasi-worker-browser.mjs
+packages/napi/wasi-worker.mjs
