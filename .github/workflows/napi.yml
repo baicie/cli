@@ -312,7 +312,7 @@ jobs:
             if ('${{ matrix.target }}'.endsWith('-musl')) {
               console.log('IMAGE=node:${{ matrix.node }}-alpine')
             } else {
-              console.log('IMAGE=node:${{ matrix.node }}-slim')
+              console.log('IMAGE=node:${{ matrix.node }}-bullseye')
             }
           " >> $GITHUB_OUTPUT
 
