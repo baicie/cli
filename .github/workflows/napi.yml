@@ -5,6 +5,8 @@ env:
   APP_NAME: 'baicie-napi'
   MACOSX_DEPLOYMENT_TARGET: '10.13'
   CARGO_INCREMENTAL: '1'
+  ROLLUP_SKIP_NODEJS_NATIVE: '1'
+
 'on':
   push:
     branches:

@@ -1,6 +1,8 @@
 import { configDefaults, defineConfig } from 'vitest/config'
 import { entries } from './scripts/aliases.js'
 
+const unitIgnore = ['packages/napi/**', '**/e2e/**']
+
 export default defineConfig({
   define: {
     __DEV__: true,
@@ -28,7 +30,7 @@ export default defineConfig({
         extends: true,
         test: {
           name: 'unit',
-          exclude: [...configDefaults.exclude, '**/e2e/**'],
+          exclude: [...configDefaults.exclude, ...unitIgnore],
         },
       },
       {
@@ -36,7 +38,7 @@ export default defineConfig({
         test: {
           name: 'unit-jsdom',
           include: ['packages/*/*.{test,spec}.*'],
-          exclude: [...configDefaults.exclude, '**/e2e/**'],
+          exclude: [...configDefaults.exclude, ...unitIgnore],
           environment: 'jsdom',
         },
       },
