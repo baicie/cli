@@ -346,8 +346,7 @@ jobs:
           run: |
             corepack enable
             pnpm install
-            pnpm test
-          working-directory: packages/napi
+            pnpm --filter @baicie/napi test
 
   test-wasi:
     name: Test WASI target
