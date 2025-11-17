@@ -259,6 +259,7 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: bindings-${{ matrix.settings.target }}
+          path: packages/napi
 
       - name: List packages
         run: ls -R .
@@ -323,6 +324,7 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: bindings-${{ matrix.target }}
+          path: packages/napi
 
       - name: List packages
         run: ls -R .
@@ -372,6 +374,7 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: bindings-wasm32-wasip1-threads
+          path: packages/napi
 
       - name: List packages
         run: ls -R .
