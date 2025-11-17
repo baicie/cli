@@ -22,7 +22,7 @@ export default defineConfig({
       include: ['packages/*/src/**'],
       exclude: [],
     },
-    exclude: ['**/templates/**', 'packages/napi/**'],
+    exclude: ['**/templates/**'],
     projects: [
       {
         extends: true,
@@ -46,6 +46,14 @@ export default defineConfig({
           name: 'e2e',
           environment: 'jsdom',
           include: ['packages/*/__tests__/e2e/*.spec.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'napi',
+          exclude: [...configDefaults.exclude, '**/e2e/**'],
+          include: ['packages/napi/__test__/*.spec.ts'],
         },
       },
     ],

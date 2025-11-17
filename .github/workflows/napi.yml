@@ -263,8 +263,7 @@ jobs:
         shell: bash
 
       - name: Test bindings
-        run: pnpm test
-        working-directory: packages/napi
+        run: pnpm test-napi
 
   test-linux-binding:
     name: Test ${{ matrix.target }} - node@${{ matrix.node }}
@@ -346,7 +345,7 @@ jobs:
           run: |
             corepack enable
             pnpm install
-            pnpm --filter @baicie/napi test
+            pnpm test-napi
 
   test-wasi:
     name: Test WASI target
@@ -379,10 +378,9 @@ jobs:
         shell: bash
 
       - name: Test bindings
-        run: pnpm test
+        run: pnpm test-napi
         env:
           NAPI_RS_FORCE_WASI: 1
-        working-directory: packages/napi
 
   publish:
     name: Publish

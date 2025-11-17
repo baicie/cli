@@ -29,7 +29,7 @@
     "build": "napi build --platform --release",
     "build:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm",
-    "test": "ava"
+    "test": "vitest run"
   },
   "engines": {
     "node": ">=20"
@@ -40,7 +40,6 @@
     "@napi-rs/cli": "^3.4.1",
     "@oxc-node/core": "^0.0.34",
     "@tybys/wasm-util": "^0.10.1",
-    "ava": "^6.4.1",
     "tinybench": "^5.1.0"
   },
   "publishConfig": {
@@ -64,20 +63,6 @@
       "aarch64-pc-windows-msvc",
       "armv7-linux-androideabi",
       "wasm32-wasip1-threads"
-    ]
-  },
-  "ava": {
-    "extensions": {
-      "ts": "module"
-    },
-    "timeout": "2m",
-    "workerThreads": false,
-    "environmentVariables": {
-      "OXC_TSCONFIG_PATH": "./__test__/tsconfig.json"
-    },
-    "nodeArguments": [
-      "--import",
-      "@oxc-node/core/register"
     ]
   }
 }

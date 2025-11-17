@@ -18,6 +18,7 @@
     "test": "vitest",
     "test-unit": "vitest --project unit*",
     "test-e2e": "vitest --project e2e",
+    "test-napi": "vitest --project napi",
     "test-coverage": "vitest run --project unit* --coverage",
     "test-docs": "pnpm run docs-build",
     "docs": "pnpm --filter=./docs run docs",

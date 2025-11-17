@@ -1,8 +1,10 @@
-import test from 'ava'
+import { expect, test } from 'vitest'
 
-import { plus100 } from '../index'
+import pkg from '../index.js'
 
-test('sync function from native code', t => {
+const { plus100 } = pkg
+
+test('sync function from native code', () => {
   const fixture = 42
-  t.is(plus100(fixture), fixture + 100)
+  expect(plus100(fixture)).toBe(fixture + 100)
 })
