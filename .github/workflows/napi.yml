@@ -343,8 +343,12 @@ jobs:
         with:
           image: ${{ steps.docker.outputs.IMAGE }}
           options: '-v ${{ github.workspace }}:${{ github.workspace }} -w ${{ github.workspace }} --platform ${{ steps.docker.outputs.PLATFORM }}'
-          run: pnpm test
+          run: |
+            corepack enable
+            pnpm install
+            pnpm test
           working-directory: packages/napi
+
   test-wasi:
     name: Test WASI target
     needs:
@@ -380,6 +384,7 @@ jobs:
         env:
           NAPI_RS_FORCE_WASI: 1
         working-directory: packages/napi
+
   publish:
     name: Publish
     runs-on: ubuntu-latest
